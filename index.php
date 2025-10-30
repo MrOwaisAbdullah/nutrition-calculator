@@ -452,49 +452,105 @@ $nutrition_items = [
 
 /* Nutrition Table */
 .nc-table-container {
-  overflow-x: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 16px;
   border: 1px solid #E3242B;
   border-radius: 8px;
-  overflow: visible;
+  position: relative;
+  max-height: 600px; /* Add max height to make the table scrollable vertically */
 }
 
 .nc-nutrition-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
-  min-width: 900px;
+  min-width: 1400px;
+  table-layout: fixed;
+  background: #FFFFFF;
+}
+
+/* Fixed columns */
+.nc-name-column,
+.nc-add-column {
+  position: sticky;
+  background: inherit;
+  z-index: 2;
+}
+
+.nc-name-column {
+  left: 0;
+  width: 200px;
+  border-right: 1px solid #E3242B;
+}
+
+.nc-allergens-column {
+  width: 100px;
+  white-space: nowrap;
 }
 
 .nc-nutrition-table th {
   background: #E3242B;
   color: #FFFFFF;
   padding: 10px 12px;
-  text-align: left;
+  text-align: center;
   font-weight: 700;
   position: sticky;
-  top: 120px;
-  z-index: 10;
+  top: 0;
+  z-index: 3;
+  width: 100px;
+  white-space: nowrap;
 }
 
 .nc-nutrition-table td {
   padding: 10px 12px;
   border-bottom: 1px solid #E3242B;
-  vertical-align: top;
+  text-align: center;
+  vertical-align: middle;
+  background: inherit;
 }
 
 .nc-nutrition-table tr:last-child td {
   border-bottom: none;
 }
 
-/* Sticky "Add" Column */
-.nc-add-column {
-  position: sticky;
+/* Fixed columns styling */
+.nc-nutrition-table th.nc-name-column {
+  left: 0;
+  z-index: 4;
+  background: #E3242B;
+}
+
+.nc-nutrition-table th.nc-add-column {
   right: 0;
+  z-index: 4;
+  background: #E3242B;
+}
+
+.nc-nutrition-table td.nc-name-column {
+  text-align: left;
+  border-right: 2px solid #E3242B;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   background: #FFFFFF;
-  z-index: 5;
-  border-left: 1px solid #E3242B;
+}
+
+.nc-nutrition-table td.nc-add-column {
+  right: 0;
+  border-left: 2px solid #E3242B;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  width: 80px;
+  background: #FFFFFF;
+}
+
+/* Ensure header corners stay on top */
+.nc-nutrition-table thead th {
+  background: #E3242B;
+}
+
+/* Hover effect for better readability */
+.nc-nutrition-table tbody tr:hover td {
+  background-color: #f8f8f8;
 }
 
 .nc-nutrition-table th.nc-add-column {
@@ -580,7 +636,6 @@ $nutrition_items = [
   background: #E3242B;
   color: #FFFFFF;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-  transform: translateY(100%);
   transition: transform 0.3s ease;
   z-index: 1000;
   max-height: 80vh;
@@ -949,19 +1004,25 @@ $nutrition_items = [
         <h2 class="nc-category-title">${category}</h2>
         <div class="nc-table-container">
           <table class="nc-nutrition-table">
-			<thead>
-			  <tr>
-				<th>Item</th>
-				<th>Calories</th>
-				<th>Total Fat (g)</th>
-				<th>Sat Fat (g)</th>
-				<th>Cholesterol (mg)</th>
-				<th>Sodium (mg)</th>
-				<th>Carbs (g)</th>
-				<th>Protein (g)</th>
-				<th class="nc-add-column">Add</th>
-			  </tr>
-			</thead>
+            <thead>
+              <tr>
+                <th class="nc-name-column">DISH</th>
+                <th>SIZE (oz)</th>
+                <th>CALORIES</th>
+                <th>CALORIES FROM FAT</th>
+                <th>TOTAL FAT (g)</th>
+                <th>SATURATED FAT (g)</th>
+                <th>TRANS FAT (g)</th>
+                <th>CHOLESTEROL (mg)</th>
+                <th>SODIUM (mg)</th>
+                <th>TOTAL CARBS (g)</th>
+                <th>DIETARY FIBER (g)</th>
+                <th>SUGARS (g)</th>
+                <th>PROTEIN (g)</th>
+                <th>ALLERGENS</th>
+                <th class="nc-add-column">Add</th>
+              </tr>
+            </thead>
             <tbody>
               ${items.map(item => renderItemRow(item)).join('')}
             </tbody>
@@ -971,39 +1032,43 @@ $nutrition_items = [
     `;
   }
 
-	function renderItemRow(item) {
-	  const isInMeal = mealList.some(i => i.id === item.id);
-	  const allergenIcons = item.allergens && item.allergens.length > 0
-		? `<div class="nc-allergens">${item.allergens.map(a => 
-			`<span class="nc-allergen-icon" title="${a}">${a.charAt(0).toUpperCase()}</span>`
-		  ).join('')}</div>`
-		: '';
+  function renderItemRow(item) {
+    const isInMeal = mealList.some(i => i.id === item.id);
+    const allergenIcons = item.allergens && item.allergens.length > 0
+      ? `<div class="nc-allergens">${item.allergens.map(a => 
+          `<span class="nc-allergen-icon" title="${a}">${a.charAt(0).toUpperCase()}</span>`
+        ).join('')}</div>`
+      : '';
 
-	  return `
-		<tr>
-		  <td>
-			<div class="nc-item-name">${item.name}</div>
-			<span class="nc-item-serving">${item.servingSizeOz} oz</span>
-			${allergenIcons}
-		  </td>
-		  <td>${item.calories}</td>
-		  <td>${item.totalFat}</td>
-		  <td>${item.saturatedFat}</td>
-		  <td>${item.cholesterol}</td>
-		  <td>${item.sodium}</td>
-		  <td>${item.totalCarbs}</td>
-		  <td>${item.protein}</td>
-		  <td class="nc-add-column">
-			<button 
-			  class="nc-add-btn ${isInMeal ? 'added' : ''}" 
-			  data-item-id="${item.id}"
-			  aria-label="Add ${item.name} to meal"
-			>
-			  ${isInMeal ? '' : '+'}
-			</button>
-		  </td>
-		</tr>
-	  `;
+    return `
+      <tr>
+        <td class="nc-name-column">
+          <div class="nc-item-name">${item.name}</div>
+        </td>
+        <td>${item.servingSizeOz}</td>
+        <td>${item.calories}</td>
+        <td>${item.caloriesFromFat}</td>
+        <td>${item.totalFat}</td>
+        <td>${item.saturatedFat}</td>
+        <td>${item.transFat}</td>
+        <td>${item.cholesterol}</td>
+        <td>${item.sodium}</td>
+        <td>${item.totalCarbs}</td>
+        <td>${item.fiber}</td>
+        <td>${item.sugars}</td>
+        <td>${item.protein}</td>
+        <td class="nc-allergens-column">${allergenIcons}</td>
+        <td class="nc-add-column">
+          <button 
+            class="nc-add-btn ${isInMeal ? 'added' : ''}" 
+            data-item-id="${item.id}"
+            aria-label="Add ${item.name} to meal"
+          >
+            ${isInMeal ? '' : '+'}
+          </button>
+        </td>
+      </tr>
+    `;
 	}
 
   function getFilteredItems() {
