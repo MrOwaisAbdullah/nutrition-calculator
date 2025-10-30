@@ -396,16 +396,23 @@ $nutrition_items = [
 
 #nc-search-input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 10px 12px;
   font-size: 14px;
-  border: 1px solid #E3242B;
+  border: 2px solid #E3242B;
   border-radius: 8px;
   color: #000;
-  background: #F8F8F8;
+  background: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(227, 36, 43, 0.15);
+}
+
+#nc-search-input:focus {
+  outline: none;
+  border-color: #C11E24;
+  box-shadow: 0 2px 10px rgba(227, 36, 43, 0.3);
 }
 
 #nc-search-input::placeholder {
-  color: #666;
+  color: #999;
 }
 
 /* Category Filters */
@@ -416,25 +423,48 @@ $nutrition_items = [
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #E3242B #f0f0f0;
+}
+
+.nc-category-filters::-webkit-scrollbar {
+  height: 6px;
+}
+
+.nc-category-filters::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.nc-category-filters::-webkit-scrollbar-thumb {
+  background: #E3242B;
+  border-radius: 10px;
 }
 
 .nc-category-chip {
-  padding: 8px 16px;
-  border: 1px solid #E3242B;
+  padding: 4px 8px;
+  border: 2px solid #E3242B;
   background: #FFFFFF;
   color: #E3242B;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
   white-space: nowrap;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.nc-category-chip:hover,
+.nc-category-chip:hover {
+  background: #F8F8F8;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
 .nc-category-chip.active {
   background: #E3242B;
   color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(227, 36, 43, 0.3);
 }
 
 /* Category Sections */
@@ -448,6 +478,7 @@ $nutrition_items = [
   margin-bottom: 16px;
   color: #E3242B;
   padding-bottom: 8px;
+  border-bottom: 2px solid #E3242B;
 }
 
 /* Nutrition Table */
@@ -455,17 +486,37 @@ $nutrition_items = [
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 16px;
-  border: 1px solid #E3242B;
-  border-radius: 8px;
+  border: 2px solid #E3242B;
+  border-radius: 12px;
   position: relative;
-  max-height: 600px; /* Add max height to make the table scrollable vertically */
+  max-height: 600px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.nc-table-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.nc-table-container::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.nc-table-container::-webkit-scrollbar-thumb {
+  background: #E3242B;
+  border-radius: 10px;
+}
+
+.nc-table-container::-webkit-scrollbar-corner {
+  background: #f0f0f0;
 }
 
 .nc-nutrition-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 14px;
+  font-size: 15px;
   min-width: 1400px;
   table-layout: fixed;
   background: #FFFFFF;
@@ -481,30 +532,33 @@ $nutrition_items = [
 
 .nc-name-column {
   left: 0;
-  width: 200px;
-  border-right: 1px solid #E3242B;
+  width: 220px;
+  border-right: 2px solid #E3242B;
 }
 
 .nc-allergens-column {
-  width: 100px;
+  width: 120px;
   white-space: nowrap;
 }
 
 .nc-nutrition-table th {
   background: #E3242B;
   color: #FFFFFF;
-  padding: 10px 12px;
+  padding: 14px 12px;
   text-align: center;
   font-weight: 700;
   position: sticky;
   top: 0;
   z-index: 3;
-  width: 100px;
+  width: 120px;
   white-space: nowrap;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .nc-nutrition-table td {
-  padding: 10px 12px;
+  padding: 14px 12px;
   border-bottom: 1px solid #E3242B;
   text-align: center;
   vertical-align: middle;
@@ -531,15 +585,15 @@ $nutrition_items = [
 .nc-nutrition-table td.nc-name-column {
   text-align: left;
   border-right: 2px solid #E3242B;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
   background: #FFFFFF;
 }
 
 .nc-nutrition-table td.nc-add-column {
   right: 0;
   border-left: 2px solid #E3242B;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  width: 80px;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  width: 100px;
   background: #FFFFFF;
 }
 
@@ -550,7 +604,7 @@ $nutrition_items = [
 
 /* Hover effect for better readability */
 .nc-nutrition-table tbody tr:hover td {
-  background-color: #f8f8f8;
+  background-color: #fdf0f0;
 }
 
 .nc-nutrition-table th.nc-add-column {
@@ -561,45 +615,47 @@ $nutrition_items = [
 .nc-item-name {
   font-weight: 700;
   color: #E3242B;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: default;
+  display: block;
 }
 
 .nc-item-serving {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   display: block;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* Allergens – Icons */
 .nc-allergens {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   margin-top: 6px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .nc-allergen-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background: #E3242B;
   color: white;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   line-height: 1;
-  title: attr(data-allergen);
+  cursor: help;
 }
 
 /* Add Button */
 .nc-add-btn {
-  width: 24px;
-  height: 24px;
-  border: 1px solid #E3242B;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #E3242B;
   background: #FFFFFF;
   color: #E3242B;
   border-radius: 50%;
@@ -609,12 +665,14 @@ $nutrition_items = [
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .nc-add-btn:hover {
   background: #E3242B;
   color: white;
+  transform: scale(1.1);
 }
 
 .nc-add-btn.added {
@@ -635,8 +693,8 @@ $nutrition_items = [
   right: 0;
   background: #E3242B;
   color: #FFFFFF;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   max-height: 80vh;
 }
@@ -653,62 +711,108 @@ $nutrition_items = [
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: #E3242B;
+  padding: 18px 24px;
+  background: #C11E24;
   cursor: pointer;
   position: relative;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 .nc-drawer-header h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   flex: 1;
+  color: #FFFFFF;
 }
 
 #nc-drawer-toggle {
   background: none;
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   margin-left: 12px;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.nc-drawer.open #nc-drawer-toggle {
+  transform: rotate(180deg);
 }
 
 .nc-drawer-content {
-  padding: 16px;
+  padding: 20px;
   background: white;
   color: #000;
   max-height: calc(80vh - 60px);
   overflow-y: auto;
   display: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .nc-drawer.open .nc-drawer-content {
   display: block;
 }
 
+.nc-drawer-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nc-drawer-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.nc-drawer-content::-webkit-scrollbar-thumb {
+  background: #E3242B;
+  border-radius: 10px;
+}
+
 /* Meal Items List – Horizontal Scroll on Mobile */
 #nc-meal-items-list {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   overflow-x: auto;
-  padding: 8px 0;
+  padding: 12px 0;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #E3242B #f0f0f0;
+}
+
+#nc-meal-items-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+#nc-meal-items-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+#nc-meal-items-list::-webkit-scrollbar-thumb {
+  background: #E3242B;
+  border-radius: 10px;
 }
 
 .nc-meal-item {
-  min-width: 220px;
+  min-width: 240px;
   background: #F8F8F8;
-  border: 1px solid #E3242B;
-  border-radius: 8px;
-  padding: 12px;
+  border: 2px solid #E3242B;
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.nc-meal-item:hover {
+  transform: translateY(-4px);
 }
 
 .nc-meal-item-name {
@@ -716,90 +820,128 @@ $nutrition_items = [
   color: #E3242B;
   margin-bottom: 8px;
   word-break: break-word;
+  font-size: 16px;
 }
 
 .nc-meal-item-remove {
-  background: #E3242B;
+  background: #C11E24;
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   align-self: flex-start;
   margin-top: auto;
+  transition: background 0.3s ease;
 }
 
-/* Totals Grid */
-.nc-totals-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+.nc-meal-item-remove:hover {
+  background: #a01a1f;
 }
 
-.nc-total-item {
-  background: #F8F8F8;
-  padding: 12px;
-  border-radius: 6px;
+/* Totals Table Container */
+.nc-totals-table-container {
+  margin-bottom: 24px;
+  overflow-x: auto;
+  border: 2px solid #E3242B;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.nc-totals-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 600px;
+}
+
+.nc-totals-table th,
+.nc-totals-table td {
+  padding: 10px 12px;
   text-align: center;
-  border: 1px solid #E3242B;
 }
 
-.nc-total-label {
-  font-size: 11px;
-  color: #666;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-}
-
-.nc-total-value {
-  font-size: 18px;
+.nc-totals-table thead th {
+  background: #E3242B;
+  color: #FFFFFF;
   font-weight: 700;
-  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.nc-total-unit {
-  font-size: 11px;
+.nc-totals-table tbody td {
+  border-bottom: 1px solid #E3242B;
+  background: #FFFFFF;
+}
+
+.nc-totals-table tbody tr:hover td {
+  background-color: #fdf0f0;
+}
+
+.nc-totals-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.nc-nutrient-name {
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+.nc-nutrient-value {
+  font-weight: 700;
+  color: #E3242B;
+}
+
+.nc-nutrient-unit {
+  font-size: 12px;
   color: #666;
+  margin-left: 4px;
 }
 
 /* Drawer Actions */
 .nc-drawer-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  padding-top: 16px;
 }
 
 .nc-btn {
   flex: 1;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 600;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .nc-btn-primary {
-  background: #FFFFFF;
-  color: #E3242B;
-  border: 1px solid #E3242B;
+  background: #E3242B;
+  color: white;
 }
 
 .nc-btn-primary:hover {
-  background: #E3242B;
-  color: white;
+  background: #C11E24;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(227, 36, 43, 0.3);
 }
 
 .nc-btn-secondary {
-  background: #E3242B;
-  color: white;
-  border: 1px solid #E3242B;
+  background: #F8F8F8;
+  color: #E3242B;
+  border: 2px solid #E3242B;
 }
 
 .nc-btn-secondary:hover {
-  background: #c01a1f;
+  background: #E3242B;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(227, 36, 43, 0.2);
 }
 
 /* Empty State */
@@ -809,48 +951,162 @@ $nutrition_items = [
   color: #666;
 }
 
-/* Mobile Responsive */
+#nc-empty-state p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Responsive design adjustments */
 @media (max-width: 768px) {
   #nutrition-calculator-app {
-    padding: 12px;
-    padding-bottom: 120px;
+    padding: 16px;
+    padding-bottom: 220px;
   }
-
+  
   .nc-controls {
     padding: 12px 0;
   }
+  
+  .nc-category-filters {
+    gap: 10px;
+  }
+  
+  .nc-category-chip {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  #nc-search-input {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
+  .nc-nutrition-table {
+    font-size: 14px;
+    min-width: 1200px;
+  }
+  
+  .nc-name-column {
+    width: 180px;
+  }
+  
+  .nc-allergens-column {
+    width: 90px;
+  }
+  
+  .nc-nutrition-table th,
+  .nc-nutrition-table td {
+    padding: 10px 8px;
+  }
+  
+  .nc-add-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+  
+  .nc-drawer-header {
+    padding: 14px 16px;
+  }
+  
+  .nc-drawer-header h3 {
+    font-size: 16px;
+  }
+  
+  .nc-drawer-content {
+    padding: 16px;
+  }
+  
+  #nc-meal-items-list {
+    gap: 12px;
+    padding: 10px 0;
+  }
+  
+  .nc-meal-item {
+    min-width: 200px;
+    padding: 14px;
+  }
+  
+  .nc-totals-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  
+  .nc-total-item {
+    padding: 14px;
+  }
+  
+  .nc-total-value {
+    font-size: 18px;
+  }
+  
+  .nc-drawer-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .nc-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
 
+@media (max-width: 480px) {
+  #nutrition-calculator-app {
+    padding: 12px;
+    padding-bottom: 200px;
+  }
+  
+  .nc-category-filters {
+    gap: 8px;
+  }
+  
+  .nc-category-chip {
+    padding: 7px 14px;
+font-size: 13px;
+  }
+  
   .nc-category-title {
     font-size: 18px;
   }
-
+  
   .nc-nutrition-table {
-    font-size: 12px;
-    min-width: 800px;
+    font-size: 13px;
+    min-width: 1000px;
   }
-
+  
+  .nc-name-column {
+    width: 150px;
+  }
+  
+  .nc-allergens-column {
+    width: 80px;
+  }
+  
   .nc-nutrition-table th,
   .nc-nutrition-table td {
     padding: 8px 6px;
   }
-
+  
   .nc-add-btn {
-    width: 22px;
-    height: 22px;
-    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
   }
-
+  
+  .nc-drawer-header {
+    padding: 12px 14px;
+  }
+  .nc-drawer-summary {
+    display: flex;
+  }
+  .nc-meal-item {
+    min-width: 180px;
+    padding: 12px;
+  }
+  
   .nc-totals-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .nc-drawer-actions {
-    flex-direction: column;
-  }
-
-  /* Ensure Add column stays visible */
-  .nc-add-column {
-    right: -1px;
   }
 }
 </style>
@@ -1179,41 +1435,76 @@ $nutrition_items = [
       `).join('');
     }
 
-    // Render detailed totals in expanded view
-    const totalsHTML = `
-      <div class="nc-total-item">
-        <div class="nc-total-label">Calories</div>
-        <div class="nc-total-value">${totals.calories}<span class="nc-total-unit"></span></div>
-      </div>
-      <div class="nc-total-item">
-        <div class="nc-total-label">Protein</div>
-        <div class="nc-total-value">${totals.protein}<span class="nc-total-unit">g</span></div>
-      </div>
-      <div class="nc-total-item">
-        <div class="nc-total-label">Total Fat</div>
-        <div class="nc-total-value">${totals.totalFat}<span class="nc-total-unit">g</span></div>
-      </div>
-      <div class="nc-total-item">
-        <div class="nc-total-label">Carbs</div>
-        <div class="nc-total-value">${totals.totalCarbs}<span class="nc-total-unit">g</span></div>
-      </div>
-      <div class="nc-total-item">
-        <div class="nc-total-label">Sodium</div>
-        <div class="nc-total-value">${totals.sodium}<span class="nc-total-unit">mg</span></div>
-      </div>
-      <div class="nc-total-item">
-        <div class="nc-total-label">Fiber</div>
-        <div class="nc-total-value">${totals.fiber}<span class="nc-total-unit">g</span></div>
+    // Render detailed totals in expanded view as a compact table with nutrients in rows
+    const allTotalsHTML = `
+      <div class="nc-totals-table-container">
+        <table class="nc-totals-table">
+          <thead>
+            <tr>
+              <th>DISH</th>
+              <th>SIZE (oz)</th>
+              <th>CALORIES</th>
+              <th>FAT CAL</th>
+              <th>FAT (g)</th>
+              <th>SAT FAT (g)</th>
+              <th>TRANS (g)</th>
+              <th>CHOL (mg)</th>
+              <th>SODIUM (mg)</th>
+              <th>CARBS (g)</th>
+              <th>FIBER (g)</th>
+              <th>SUGAR (g)</th>
+              <th>PROTEIN (g)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nc-nutrient-name">TOTAL</td>
+              <td class="nc-nutrient-value">${totals.servingSizeOz.toFixed(2)}</td>
+              <td class="nc-nutrient-value">${totals.calories}</td>
+              <td class="nc-nutrient-value">${totals.caloriesFromFat}</td>
+              <td class="nc-nutrient-value">${totals.totalFat}g</td>
+              <td class="nc-nutrient-value">${totals.saturatedFat}g</td>
+              <td class="nc-nutrient-value">${totals.transFat}g</td>
+              <td class="nc-nutrient-value">${totals.cholesterol}mg</td>
+              <td class="nc-nutrient-value">${totals.sodium}mg</td>
+              <td class="nc-nutrient-value">${totals.totalCarbs}g</td>
+              <td class="nc-nutrient-value">${totals.fiber}g</td>
+              <td class="nc-nutrient-value">${totals.sugars}g</td>
+              <td class="nc-nutrient-value">${totals.protein}g</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 12px; margin-top: 10px; color: #666;">*Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs.</p>
       </div>
     `;
-    document.getElementById('nc-totals').innerHTML = totalsHTML;
+    document.getElementById('nc-totals').innerHTML = allTotalsHTML;
   }
 
   function calculateTotals() {
+    // Initialize with default values including servingSizeOz
+    const totals = {
+      servingSizeOz: 0,
+      calories: 0,
+      caloriesFromFat: 0,
+      totalFat: 0,
+      saturatedFat: 0,
+      transFat: 0,
+      cholesterol: 0,
+      sodium: 0,
+      totalCarbs: 0,
+      fiber: 0,
+      sugars: 0,
+      protein: 0
+    };
+
+    // Sum up all nutritional values
     return mealList.reduce((acc, item) => {
+      acc.servingSizeOz += item.servingSizeOz || 0;
       acc.calories += item.calories || 0;
+      acc.caloriesFromFat += item.caloriesFromFat || 0;
       acc.totalFat += item.totalFat || 0;
       acc.saturatedFat += item.saturatedFat || 0;
+      acc.transFat += item.transFat || 0;
       acc.cholesterol += item.cholesterol || 0;
       acc.sodium += item.sodium || 0;
       acc.totalCarbs += item.totalCarbs || 0;
@@ -1221,17 +1512,7 @@ $nutrition_items = [
       acc.sugars += item.sugars || 0;
       acc.protein += item.protein || 0;
       return acc;
-    }, {
-      calories: 0,
-      totalFat: 0,
-      saturatedFat: 0,
-      cholesterol: 0,
-      sodium: 0,
-      totalCarbs: 0,
-      fiber: 0,
-      sugars: 0,
-      protein: 0
-    });
+    }, totals);
   }
 
   // ============================================
