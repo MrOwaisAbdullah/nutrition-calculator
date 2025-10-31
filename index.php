@@ -442,29 +442,29 @@ $nutrition_items = [
 }
 
 .nc-category-chip {
-  padding: 4px 8px;
-  border: 2px solid #E3242B;
-  background: #FFFFFF;
-  color: #E3242B;
-  border-radius: 12px;
+  padding: 4px 8px !important;
+  border: 2px solid #E3242B !important;
+  background: #FFFFFF !important;
+  color: #E3242B !important;
+  border-radius: 12px !important;
   cursor: pointer;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 10px !important;
+  font-weight: 600 !important;
   white-space: nowrap;
   transition: all 0.3s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
 }
 
 .nc-category-chip:hover {
-  background: #F8F8F8;
+  background: #F8F8F8 !important;
   transform: translateY(-1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
 }
 
 .nc-category-chip.active {
-  background: #E3242B;
-  color: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(227, 36, 43, 0.3);
+  background: #E3242B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 1px 4px rgba(227, 36, 43, 0.3) !important;
 }
 
 /* Category Sections */
