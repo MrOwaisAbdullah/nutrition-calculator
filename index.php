@@ -337,7 +337,7 @@ $nutrition_items = [
   <!-- Bottom Drawer -->
   <div id="nc-meal-drawer" class="nc-drawer hidden" role="region" aria-label="Your meal summary" tabindex="-1">
     <div class="nc-drawer-header">
-      <h3>Your Meal (<span id="nc-item-count">0</span>)</h3>
+      <h3>Your Meal (<span id="nc-item-count">0</span> <span id="nc-item-count-text">items</span>)</h3>
       
       <div class="nc-drawer-summary" id="nc-drawer-summary">
         <!-- Summary will be rendered here -->
@@ -380,10 +380,7 @@ $nutrition_items = [
 /* Controls Section */
 .nc-controls {
   margin-bottom: 24px;
-  position: sticky;
-  top: 0;
   background: #FFFFFF;
-  z-index: 100;
   padding: 16px 0;
   border-bottom: 2px solid #E3242B;
 }
@@ -396,19 +393,19 @@ $nutrition_items = [
 
 #nc-search-input {
   flex: 1;
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: 12px 16px;
+  font-size: 16px;
   border: 2px solid #E3242B;
   border-radius: 8px;
   color: #000;
   background: #FFFFFF;
-  box-shadow: 0 2px 6px rgba(227, 36, 43, 0.15);
+  box-shadow: 0 4px 6px rgba(227, 36, 43, 0.1);
 }
 
 #nc-search-input:focus {
   outline: none;
   border-color: #C11E24;
-  box-shadow: 0 2px 10px rgba(227, 36, 43, 0.3);
+  box-shadow: 0 4px 12px rgba(227, 36, 43, 0.2);
 }
 
 #nc-search-input::placeholder {
@@ -422,7 +419,7 @@ $nutrition_items = [
   flex-wrap: wrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 0;
+  padding: 6px 2px;
   scrollbar-width: thin;
   scrollbar-color: #E3242B #f0f0f0;
 }
@@ -442,29 +439,35 @@ $nutrition_items = [
 }
 
 .nc-category-chip {
-  padding: 4px 8px !important;
+  padding: 10px 20px !important;
   border: 2px solid #E3242B !important;
   background: #FFFFFF !important;
   color: #E3242B !important;
-  border-radius: 12px !important;
+  border-radius: 24px !important;
   cursor: pointer;
-  font-size: 10px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   white-space: nowrap;
   transition: all 0.3s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  text-align: center;
 }
 
 .nc-category-chip:hover {
-  background: #F8F8F8 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  background: #FFF2F2 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(227, 36, 43, 0.25) !important;
 }
 
 .nc-category-chip.active {
   background: #E3242B !important;
   color: #FFFFFF !important;
-  box-shadow: 0 1px 4px rgba(227, 36, 43, 0.3) !important;
+  box-shadow: 0 4px 10px rgba(227, 36, 43, 0.4) !important;
 }
 
 /* Category Sections */
@@ -473,12 +476,11 @@ $nutrition_items = [
 }
 
 .nc-category-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 16px;
   color: #E3242B;
   padding-bottom: 8px;
-  border-bottom: 2px solid #E3242B;
 }
 
 /* Nutrition Table */
@@ -486,16 +488,16 @@ $nutrition_items = [
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 16px;
-  border: 2px solid #E3242B;
+  border: 2px solid #ccc;
   border-radius: 12px;
   position: relative;
   max-height: 600px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .nc-table-container::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+  height: 10px;
+  width: 10px;
 }
 
 .nc-table-container::-webkit-scrollbar-track {
@@ -516,8 +518,8 @@ $nutrition_items = [
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 15px;
-  min-width: 1400px;
+  font-size: 14px;
+  min-width: 1500px;
   table-layout: fixed;
   background: #FFFFFF;
 }
@@ -532,8 +534,8 @@ $nutrition_items = [
 
 .nc-name-column {
   left: 0;
-  width: 220px;
-  border-right: 2px solid #E3242B;
+  width: 250px;
+  border-right: 2px solid #ccc;
 }
 
 .nc-allergens-column {
@@ -544,7 +546,7 @@ $nutrition_items = [
 .nc-nutrition-table th {
   background: #E3242B;
   color: #FFFFFF;
-  padding: 14px 12px;
+  padding: 10px 8px;
   text-align: center;
   font-weight: 700;
   position: sticky;
@@ -552,17 +554,45 @@ $nutrition_items = [
   z-index: 3;
   width: 120px;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nc-nutrition-table th.nc-name-column {
+  width: 240px;
+}
+
+@media (max-width: 768px) {
+  .nc-nutrition-table th.nc-name-column {
+    width: 180px;
+  }
+  
+  .nc-item-name {
+    white-space: normal;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-nutrition-table th.nc-name-column {
+    width: 150px;
+  }
+  
+  .nc-item-name {
+    white-space: normal;
+    font-size: 12px;
+  }
 }
 
 .nc-nutrition-table td {
-  padding: 14px 12px;
-  border-bottom: 1px solid #E3242B;
+  padding: 10px 8px;
+  border-bottom: 1px solid #e0e0e0;
   text-align: center;
   vertical-align: middle;
   background: inherit;
+  transition: background-color 0.3s ease;
 }
 
 .nc-nutrition-table tr:last-child td {
@@ -580,20 +610,21 @@ $nutrition_items = [
   right: 0;
   z-index: 4;
   background: #E3242B;
+  width: 60px;
 }
 
 .nc-nutrition-table td.nc-name-column {
   text-align: left;
-  border-right: 2px solid #E3242B;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  border-right: 2px solid #ccc;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.1);
   background: #FFFFFF;
 }
 
 .nc-nutrition-table td.nc-add-column {
   right: 0;
-  border-left: 2px solid #E3242B;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-  width: 100px;
+  border-left: 2px solid #ccc;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.1);
+  width: 80px;
   background: #FFFFFF;
 }
 
@@ -604,7 +635,15 @@ $nutrition_items = [
 
 /* Hover effect for better readability */
 .nc-nutrition-table tbody tr:hover td {
-  background-color: #fdf0f0;
+  background-color: #f0f0f0;
+}
+
+.nc-nutrition-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.nc-nutrition-table tbody tr:nth-child(even):hover td {
+  background-color: #e8e8e8;
 }
 
 .nc-nutrition-table th.nc-add-column {
@@ -618,6 +657,22 @@ $nutrition_items = [
   text-decoration: none;
   cursor: default;
   display: block;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .nc-item-name {
+    white-space: normal;
+    word-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-item-name {
+    white-space: normal;
+    word-wrap: break-word;
+  }
 }
 
 .nc-item-serving {
@@ -637,47 +692,42 @@ $nutrition_items = [
 }
 
 .nc-allergen-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 22px;
   height: 22px;
-  background: #E3242B;
-  color: white;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 1;
   cursor: help;
+  vertical-align: middle;
 }
 
 /* Add Button */
 .nc-add-btn {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border: 2px solid #E3242B;
   background: #FFFFFF;
   color: #E3242B;
   border-radius: 50%;
   cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  min-height: 36px;
 }
 
 .nc-add-btn:hover {
   background: #E3242B;
   color: white;
   transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(227, 36, 43, 0.4);
 }
 
 .nc-add-btn.added {
   background: #E3242B;
   color: white;
+  border-color: #C11E24;
 }
 
 .nc-add-btn.added::after {
@@ -697,6 +747,8 @@ $nutrition_items = [
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   max-height: 80vh;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 .nc-drawer.open {
@@ -777,7 +829,7 @@ $nutrition_items = [
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 12px 0;
+  padding: 16px 0;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 20px;
   scrollbar-width: thin;
@@ -785,7 +837,7 @@ $nutrition_items = [
 }
 
 #nc-meal-items-list::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
 }
 
 #nc-meal-items-list::-webkit-scrollbar-track {
@@ -800,19 +852,21 @@ $nutrition_items = [
 
 .nc-meal-item {
   min-width: 240px;
-  background: #F8F8F8;
+  background: #FFFFFF;
   border: 2px solid #E3242B;
   border-radius: 12px;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
+  border: 1px solid #E3242B;
 }
 
 .nc-meal-item:hover {
   transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(227, 36, 43, 0.2);
 }
 
 .nc-meal-item-name {
@@ -823,31 +877,46 @@ $nutrition_items = [
   font-size: 16px;
 }
 
+/* Style for item count */
+.nc-meal-item-name count {
+  color: #E3242B;
+  font-weight: 700;
+}
+
+/* Style for highlighted item count */
+.nc-item-count-highlight {
+  color: #E3242B;
+  font-weight: 700;
+}
+
 .nc-meal-item-remove {
   background: #C11E24;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 12px 18px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   align-self: flex-start;
   margin-top: auto;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .nc-meal-item-remove:hover {
   background: #a01a1f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.25);
 }
 
 /* Totals Table Container */
 .nc-totals-table-container {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   overflow-x: auto;
-  border: 2px solid #E3242B;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .nc-totals-table {
@@ -859,8 +928,14 @@ $nutrition_items = [
 
 .nc-totals-table th,
 .nc-totals-table td {
-  padding: 10px 12px;
+  padding: 10px 8px;
   text-align: center;
+  border-right: 1px solid #e0e0e0;
+}
+
+.nc-totals-table th:last-child,
+.nc-totals-table td:last-child {
+  border-right: none;
 }
 
 .nc-totals-table thead th {
@@ -868,16 +943,23 @@ $nutrition_items = [
   color: #FFFFFF;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nc-totals-table tbody td {
-  border-bottom: 1px solid #E3242B;
+  border-bottom: 1px solid #e0e0e0;
   background: #FFFFFF;
 }
 
+.nc-totals-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 .nc-totals-table tbody tr:hover td {
-  background-color: #fdf0f0;
+  background-color: #f0f0f0;
 }
 
 .nc-totals-table tbody tr:last-child td {
@@ -901,23 +983,27 @@ $nutrition_items = [
   margin-left: 4px;
 }
 
+
+
 /* Drawer Actions */
 .nc-drawer-actions {
   display: flex;
   gap: 16px;
   padding-top: 16px;
+  flex-wrap: wrap;
 }
 
 .nc-btn {
   flex: 1;
-  padding: 16px;
+  padding: 12px 16px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 700;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  min-width: 100px;
 }
 
 .nc-btn-primary {
@@ -928,21 +1014,70 @@ $nutrition_items = [
 .nc-btn-primary:hover {
   background: #C11E24;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(227, 36, 43, 0.3);
+  box-shadow: 0 6px 12px rgba(227, 36, 43, 0.35);
 }
 
 .nc-btn-secondary {
-  background: #F8F8F8;
+  background: #FFFFFF;
   color: #E3242B;
   border: 2px solid #E3242B;
 }
 
 .nc-btn-secondary:hover {
-  background: #E3242B;
-  color: white;
+  background: #FFF2F2;
+  color: #C11E24;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(227, 36, 43, 0.2);
+  box-shadow: 0 6px 12px rgba(227, 36, 43, 0.25);
 }
+
+/* Responsive button adjustments */
+@media (max-width: 768px) {
+  .nc-drawer-actions {
+    flex-direction: column;
+  }
+  
+  .nc-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+/* Compact summary in drawer header */
+.nc-drawer-summary {
+  display: flex;
+  gap: 20px;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.nc-summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nc-summary-label {
+  font-size: 12px;
+  color: #FFCOCF;
+  margin-bottom: 4px;
+}
+
+.nc-summary-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+
 
 /* Empty State */
 #nc-empty-state {
@@ -960,29 +1095,31 @@ $nutrition_items = [
 @media (max-width: 768px) {
   #nutrition-calculator-app {
     padding: 16px;
-    padding-bottom: 220px;
+    padding-bottom: 240px;
   }
   
   .nc-controls {
-    padding: 12px 0;
+    padding: 16px 0;
   }
   
   .nc-category-filters {
     gap: 10px;
+    padding: 8px 2px;
   }
   
   .nc-category-chip {
-    padding: 8px 16px;
+    padding: 10px 24px;
     font-size: 14px;
+    min-height: 40px;
   }
   
   #nc-search-input {
-    padding: 12px;
-    font-size: 15px;
+    padding: 14px 16px;
+    font-size: 16px;
   }
   
   .nc-nutrition-table {
-    font-size: 14px;
+    font-size: 13px;
     min-width: 1200px;
   }
   
@@ -991,70 +1128,66 @@ $nutrition_items = [
   }
   
   .nc-allergens-column {
-    width: 90px;
+    width: 100px;
   }
   
   .nc-nutrition-table th,
   .nc-nutrition-table td {
-    padding: 10px 8px;
+    padding: 12px 8px;
   }
   
   .nc-add-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
   
   .nc-drawer-header {
-    padding: 14px 16px;
+    padding: 18px 20px;
   }
   
   .nc-drawer-header h3 {
-    font-size: 16px;
+    font-size: 18px;
   }
   
   .nc-drawer-content {
-    padding: 16px;
+    padding: 20px;
   }
   
   #nc-meal-items-list {
-    gap: 12px;
-    padding: 10px 0;
+    gap: 16px;
+    padding: 16px 0;
   }
   
   .nc-meal-item {
-    min-width: 200px;
-    padding: 14px;
+    min-width: 240px;
+    padding: 16px;
   }
   
-  .nc-totals-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
-  }
-  
-  .nc-total-item {
-    padding: 14px;
-  }
-  
-  .nc-total-value {
-    font-size: 18px;
+  .nc-totals-table-container {
+    overflow-x: auto;
+    margin-bottom: 12px;
   }
   
   .nc-drawer-actions {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
   
   .nc-btn {
-    padding: 14px;
-    font-size: 15px;
+    padding: 16px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 480px) {
   #nutrition-calculator-app {
     padding: 12px;
-    padding-bottom: 200px;
+    padding-bottom: 220px;
+  }
+  
+  .nc-controls {
+    padding: 12px 0;
   }
   
   .nc-category-filters {
@@ -1062,17 +1195,18 @@ $nutrition_items = [
   }
   
   .nc-category-chip {
-    padding: 7px 14px;
-font-size: 13px;
+    padding: 10px 20px;
+    font-size: 13px;
+    min-height: 38px;
   }
   
   .nc-category-title {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .nc-nutrition-table {
-    font-size: 13px;
-    min-width: 1000px;
+    font-size: 12px;
+    min-width: 1200px;
   }
   
   .nc-name-column {
@@ -1085,28 +1219,46 @@ font-size: 13px;
   
   .nc-nutrition-table th,
   .nc-nutrition-table td {
-    padding: 8px 6px;
+    padding: 10px 6px;
   }
   
   .nc-add-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
   
   .nc-drawer-header {
-    padding: 12px 14px;
-  }
-  .nc-drawer-summary {
-    display: flex;
-  }
-  .nc-meal-item {
-    min-width: 180px;
-    padding: 12px;
+    padding: 16px 18px;
   }
   
-  .nc-totals-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .nc-drawer-header h3 {
+    font-size: 16px;
+  }
+  
+  .nc-drawer-content {
+    padding: 18px;
+  }
+  
+  #nc-meal-items-list {
+    gap: 12px;
+    padding: 12px 0;
+  }
+  
+  .nc-meal-item {
+    min-width: 220px;
+    padding: 14px;
+  }
+  
+  .nc-totals-table-container {
+    overflow-x: auto;
+    margin-bottom: 12px;
+  }
+  
+  .nc-btn {
+    padding: 16px;
+    font-size: 15px;
+    min-width: auto;
   }
 }
 </style>
@@ -1118,6 +1270,13 @@ font-size: 13px;
 
 (function() {
   'use strict';
+
+  // Configuration for allergen icons
+  const ALLERGEN_ICON_CONFIG = {
+    basePath: 'https://dev-my-semakan-str.pantheonsite.io/wp-content/uploads/2025/10/',  // Base path for allergen icons
+    defaultIcon: 'https://dev-my-semakan-str.pantheonsite.io/wp-content/uploads/2025/10/default-allergen.png',  // Default icon for missing allergen images
+    extension: '.png'  // Default file extension for allergen icons
+  };
 
   // Embed nutrition data from PHP
   const NUTRITION_DATA = <?php echo json_encode($nutrition_items); ?>;
@@ -1292,7 +1451,7 @@ font-size: 13px;
     const isInMeal = mealList.some(i => i.id === item.id);
     const allergenIcons = item.allergens && item.allergens.length > 0
       ? `<div class="nc-allergens">${item.allergens.map(a => 
-          `<span class="nc-allergen-icon" title="${a}">${a.charAt(0).toUpperCase()}</span>`
+          `<img class="nc-allergen-icon" src="${ALLERGEN_ICON_CONFIG.basePath}${a.toLowerCase().replace(/\s+/g, '-')}${ALLERGEN_ICON_CONFIG.extension}" alt="${a}" title="${a}" onerror="this.onerror=null; this.src='${ALLERGEN_ICON_CONFIG.basePath}${ALLERGEN_ICON_CONFIG.defaultIcon}';">`
         ).join('')}</div>`
       : '';
 
@@ -1394,6 +1553,7 @@ font-size: 13px;
   function renderDrawer() {
     const itemCount = mealList.length;
     document.getElementById('nc-item-count').textContent = itemCount;
+    document.getElementById('nc-item-count-text').textContent = itemCount === 1 ? 'item' : 'items';
 
     // Calculate totals
     const totals = calculateTotals();
@@ -1416,23 +1576,45 @@ font-size: 13px;
     
     document.getElementById('nc-drawer-summary').innerHTML = summaryHTML;
 
-    // Render meal items list
+    // Render meal items list with grouping and counts
     const itemsList = document.getElementById('nc-meal-items-list');
     if (itemCount === 0) {
       itemsList.innerHTML = '<p style="text-align: center; color: #757575;">No items added yet</p>';
     } else {
-      itemsList.innerHTML = mealList.map((item, index) => `
-        <div class="nc-meal-item">
-          <span class="nc-meal-item-name">${item.name}</span>
-          <button 
-            class="nc-meal-item-remove" 
-            data-index="${index}"
-            aria-label="Remove ${item.name} from meal"
-          >
-            Remove
-          </button>
-        </div>
-      `).join('');
+      // Group items by ID and count them
+      const groupedItems = mealList.reduce((acc, item) => {
+        if (!acc[item.id]) {
+          acc[item.id] = {
+            ...item,
+            count: 0,
+            indices: []
+          };
+        }
+        acc[item.id].count++;
+        acc[item.id].indices.push(mealList.indexOf(item));
+        return acc;
+      }, {});
+      
+      // Create HTML for grouped items
+      const groupedItemsArray = Object.values(groupedItems);
+      itemsList.innerHTML = groupedItemsArray.map((groupedItem, groupIndex) => {
+        const displayName = groupedItem.count > 1 
+          ? `${groupedItem.name} <span class="nc-item-count-highlight">× ${groupedItem.count}</span>` 
+          : groupedItem.name;
+          
+        return `
+          <div class="nc-meal-item">
+            <span class="nc-meal-item-name">${displayName}</span>
+            <button 
+              class="nc-meal-item-remove" 
+              data-indices="${groupedItem.indices.join(',')}"
+              aria-label="Remove ${groupedItem.name} from meal"
+            >
+              Remove
+            </button>
+          </div>
+        `;
+      }).join('');
     }
 
     // Render detailed totals in expanded view as a compact table with nutrients in rows
@@ -1458,7 +1640,7 @@ font-size: 13px;
           </thead>
           <tbody>
             <tr>
-              <td class="nc-nutrient-name">TOTAL</td>
+              <td class="nc-nutrient-name">TOTAL (${mealList.length} ${mealList.length === 1 ? 'item' : 'items'})</td>
               <td class="nc-nutrient-value">${totals.servingSizeOz.toFixed(2)}</td>
               <td class="nc-nutrient-value">${totals.calories}</td>
               <td class="nc-nutrient-value">${totals.caloriesFromFat}</td>
@@ -1474,7 +1656,6 @@ font-size: 13px;
             </tr>
           </tbody>
         </table>
-        <p style="font-size: 12px; margin-top: 10px; color: #666;">*Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs.</p>
       </div>
     `;
     document.getElementById('nc-totals').innerHTML = allTotalsHTML;
@@ -1651,14 +1832,27 @@ font-size: 13px;
     // Remove from meal buttons (delegated)
     document.getElementById('nc-meal-items-list').addEventListener('click', (e) => {
       if (e.target.classList.contains('nc-meal-item-remove')) {
-        const index = parseInt(e.target.dataset.index);
-        removeFromMeal(index);
+        const indicesStr = e.target.dataset.indices;
+        if (indicesStr) {
+          // Handle grouped items removal
+          const indices = indicesStr.split(',').map(i => parseInt(i));
+          // Remove items in reverse order to maintain correct indices
+          indices.sort((a, b) => b - a).forEach(index => removeFromMeal(index));
+        } else {
+          const index = parseInt(e.target.dataset.index);
+          removeFromMeal(index);
+        }
       }
     });
 
     // Drawer toggle
     document.getElementById('nc-drawer-toggle').addEventListener('click', toggleDrawer);
-    document.querySelector('.nc-drawer-header').addEventListener('click', toggleDrawer);
+    document.querySelector('.nc-drawer-header').addEventListener('click', function(event) {
+      // Prevent toggling when clicking on the toggle button itself
+      if (event.target.id !== 'nc-drawer-toggle') {
+        toggleDrawer();
+      }
+    });
 
     // Clear meal
     document.getElementById('nc-clear-meal').addEventListener('click', clearMeal);
