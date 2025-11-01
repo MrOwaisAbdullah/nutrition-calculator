@@ -566,23 +566,28 @@ $nutrition_items = [
 
 @media (max-width: 768px) {
   .nc-nutrition-table th.nc-name-column {
-    width: 180px;
-  }
-  
-  .nc-item-name {
-    white-space: normal;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nc-nutrition-table th.nc-name-column {
     width: 150px;
   }
   
   .nc-item-name {
     white-space: normal;
-    font-size: 12px;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-nutrition-table th {
+    width: 100px;
+    font-size: 10px !important;
+  }
+  
+  .nc-nutrition-table th.nc-name-column {
+    width: 130px;
+  }
+  
+  .nc-item-name {
+    white-space: normal;
+    font-size: 12px !important;
   }
 }
 
@@ -624,7 +629,7 @@ $nutrition_items = [
   right: 0;
   border-left: 2px solid #ccc;
   box-shadow: -2px 0 12px rgba(0,0,0,0.1);
-  width: 80px;
+  width: 60px;
   background: #FFFFFF;
 }
 
@@ -646,9 +651,9 @@ $nutrition_items = [
   background-color: #e8e8e8;
 }
 
-.nc-nutrition-table th.nc-add-column {
+/* .nc-nutrition-table th.nc-add-column {
   border-left: none;
-}
+} */
 
 /* Item Name Cell */
 .nc-item-name {
@@ -1055,7 +1060,6 @@ $nutrition_items = [
 .nc-drawer-summary {
   display: flex;
   gap: 20px;
-  margin-left: 10px;
   flex: 1;
 }
 
@@ -1094,7 +1098,7 @@ $nutrition_items = [
 /* Responsive design adjustments */
 @media (max-width: 768px) {
   #nutrition-calculator-app {
-    padding: 16px;
+    padding: 12px;
     padding-bottom: 240px;
   }
   
@@ -1119,7 +1123,7 @@ $nutrition_items = [
   }
   
   .nc-nutrition-table {
-    font-size: 13px;
+    font-size: 12px;
     min-width: 1200px;
   }
   
@@ -1143,11 +1147,11 @@ $nutrition_items = [
   }
   
   .nc-drawer-header {
-    padding: 18px 20px;
+    padding: 16px 18px;
   }
   
   .nc-drawer-header h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .nc-drawer-content {
@@ -1182,7 +1186,7 @@ $nutrition_items = [
 
 @media (max-width: 480px) {
   #nutrition-calculator-app {
-    padding: 12px;
+    padding: 10px;
     padding-bottom: 220px;
   }
   
@@ -1205,7 +1209,7 @@ $nutrition_items = [
   }
   
   .nc-nutrition-table {
-    font-size: 12px;
+    font-size: 11px;
     min-width: 1200px;
   }
   
@@ -1229,15 +1233,15 @@ $nutrition_items = [
   }
   
   .nc-drawer-header {
-    padding: 16px 18px;
+    padding: 12px 14px;
   }
   
   .nc-drawer-header h3 {
-    font-size: 16px;
+    font-size: 12px;
   }
   
   .nc-drawer-content {
-    padding: 18px;
+    padding: 16px;
   }
   
   #nc-meal-items-list {
@@ -1247,7 +1251,7 @@ $nutrition_items = [
   
   .nc-meal-item {
     min-width: 220px;
-    padding: 14px;
+    padding: 12px;
   }
   
   .nc-totals-table-container {
@@ -1257,7 +1261,7 @@ $nutrition_items = [
   
   .nc-btn {
     padding: 16px;
-    font-size: 15px;
+    font-size: 14px;
     min-width: auto;
   }
 }
