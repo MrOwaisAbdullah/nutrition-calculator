@@ -1,9 +1,1583 @@
-/**
- * Panda Express Nutrition Calculator
- */
+<?php
+// Nutrition data
+$nutrition_items = [
+// Sides
+[
+  "id" => "chow-mein",
+  "name" => "Chow Mein",
+  "category" => "Sides",
+  "servingSizeOz" => 11,
+  "calories" => 600,
+  "caloriesFromFat" => 210,
+  "totalFat" => 23,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 1000,
+  "totalCarbs" => 94,
+  "fiber" => 7,
+  "sugars" => 11,
+  "protein" => 15,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "chow-mein-cub-meal",
+  "name" => "Chow Mein - Cub Meal",
+  "category" => "Sides",
+  "servingSizeOz" => 8.25,
+  "calories" => 825,
+  "caloriesFromFat" => 440,
+  "totalFat" => 175,
+  "saturatedFat" => 19,
+  "transFat" => 3,
+  "cholesterol" => 0,
+  "sodium" => 860,
+  "totalCarbs" => 57,
+  "fiber" => 3,
+  "sugars" => 8,
+  "protein" => 11,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "fried-rice",
+  "name" => "Fried Rice",
+  "category" => "Sides",
+  "servingSizeOz" => 11,
+  "calories" => 620,
+  "caloriesFromFat" => 170,
+  "totalFat" => 19,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 140,
+  "sodium" => 1000,
+  "totalCarbs" => 101,
+  "fiber" => 1,
+  "sugars" => 4,
+  "protein" => 13,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "fried-rice-cub-meal",
+  "name" => "Fried Rice - Cub Meal",
+  "category" => "Sides",
+  "servingSizeOz" => 8.25,
+  "calories" => 466,
+  "caloriesFromFat" => 120,
+  "totalFat" => 13,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 110,
+  "sodium" => 760,
+  "totalCarbs" => 76,
+  "fiber" => 0,
+  "sugars" => 3,
+  "protein" => 9,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "white-steamed-rice",
+  "name" => "White Steamed Rice",
+  "category" => "Sides",
+  "servingSizeOz" => 11,
+  "calories" => 520,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 118,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 10,
+  "allergens" => []
+],
+[
+  "id" => "white-steamed-rice-cub-meal",
+  "name" => "White Steamed Rice - Cub Meal",
+  "category" => "Sides",
+  "servingSizeOz" => 8.25,
+  "calories" => 390,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 87,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 8,
+  "allergens" => []
+],
+[
+  "id" => "super-greens",
+  "name" => "Super Greens",
+  "category" => "Sides",
+  "servingSizeOz" => 10,
+  "calories" => 130,
+  "caloriesFromFat" => 40,
+  "totalFat" => 4,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 370,
+  "totalCarbs" => 14,
+  "fiber" => 7,
+  "sugars" => 6,
+  "protein" => 9,
+  "allergens" => ["wheat"]
+],
+[
+  "id" => "super-greens-cub-meal",
+  "name" => "Super Greens - Cub Meal",
+  "category" => "Sides",
+  "servingSizeOz" => 7.5,
+  "calories" => 90,
+  "caloriesFromFat" => 30,
+  "totalFat" => 3,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 290,
+  "totalCarbs" => 10,
+  "fiber" => 6,
+  "sugars" => 4,
+  "protein" => 6,
+  "allergens" => ["wheat"]
+],
+[
+  "id" => "chow-fun",
+  "name" => "Chow Fun",
+  "category" => "Sides",
+  "servingSizeOz" => 8.5,
+  "calories" => 410,
+  "caloriesFromFat" => 80,
+  "totalFat" => 9,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 1110,
+  "totalCarbs" => 73,
+  "fiber" => 1,
+  "sugars" => 6,
+  "protein" => 9,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "chow-fun-cub-meal",
+  "name" => "Chow Fun - Cub Meal",
+  "category" => "Sides",
+  "servingSizeOz" => 6.2,
+  "calories" => 300,
+  "caloriesFromFat" => 60,
+  "totalFat" => 6,
+  "saturatedFat" => 0.5,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 810,
+  "totalCarbs" => 53,
+  "fiber" => 1,
+  "sugars" => 4,
+  "protein" => 6,
+  "allergens" => ["wheat", "soy"]
+],
 
-// Include nutrition data from separate file
-require_once 'nutrition-data.php';
+// Vegetables
+[
+  "id" => "super-greens-entree",
+  "name" => "Super Greens Entree",
+  "category" => "Vegetables",
+  "servingSizeOz" => 7,
+  "calories" => 90,
+  "caloriesFromFat" => 25,
+  "totalFat" => 3,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 260,
+  "totalCarbs" => 10,
+  "fiber" => 5,
+  "sugars" => 4,
+  "protein" => 6,
+  "allergens" => ["wheat"]
+],
+[
+  "id" => "super-greens-cub-meal-entree",
+  "name" => "Super Greens - Cub Meal Entree",
+  "category" => "Vegetables",
+  "servingSizeOz" => 5.25,
+  "calories" => 60,
+  "caloriesFromFat" => 20,
+  "totalFat" => 2,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 200,
+  "totalCarbs" => 7,
+  "fiber" => 4,
+  "sugars" => 3,
+  "protein" => 4,
+  "allergens" => ["wheat"]
+],
+[
+  "id" => "eggplant-tofu",
+  "name" => "Eggplant Tofu",
+  "category" => "Vegetables",
+  "servingSizeOz" => 6.1,
+  "calories" => 340,
+  "caloriesFromFat" => 220,
+  "totalFat" => 24,
+  "saturatedFat" => 3.5,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 520,
+  "totalCarbs" => 23,
+  "fiber" => 3,
+  "sugars" => 17,
+  "protein" => 7,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "eggplant-tofu-cub-meal",
+  "name" => "Eggplant Tofu - Cub Meal",
+  "category" => "Vegetables",
+  "servingSizeOz" => 4.6,
+  "calories" => 250,
+  "caloriesFromFat" => 160,
+  "totalFat" => 18,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 390,
+  "totalCarbs" => 17,
+  "fiber" => 2,
+  "sugars" => 13,
+  "protein" => 5,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Specialty
+[
+  "id" => "beyond-orange-chicken",
+  "name" => "Beyond Orange Chicken",
+  "category" => "Specialty",
+  "servingSizeOz" => 4.75,
+  "calories" => 440,
+  "caloriesFromFat" => 200,
+  "totalFat" => 22,
+  "saturatedFat" => 5,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 810,
+  "totalCarbs" => 47,
+  "fiber" => 5,
+  "sugars" => 15,
+  "protein" => 13,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "beyond-orange-chicken-cub-meal",
+  "name" => "Beyond Orange Chicken - Cub Meal",
+  "category" => "Specialty",
+  "servingSizeOz" => 3.6,
+  "calories" => 330,
+  "caloriesFromFat" => 155,
+  "totalFat" => 17,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 610,
+  "totalCarbs" => 36,
+  "fiber" => 4,
+  "sugars" => 11,
+  "protein" => 10,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+
+// Chicken
+[
+  "id" => "black-pepper-chicken",
+  "name" => "Black Pepper Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 6.3,
+  "calories" => 280,
+  "caloriesFromFat" => 170,
+  "totalFat" => 19,
+  "saturatedFat" => 3.5,
+  "transFat" => 0,
+  "cholesterol" => 55,
+  "sodium" => 1130,
+  "totalCarbs" => 15,
+  "fiber" => 1,
+  "sugars" => 7,
+  "protein" => 13,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "black-pepper-chicken-cub-meal",
+  "name" => "Black Pepper Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 4.6,
+  "calories" => 200,
+  "caloriesFromFat" => 130,
+  "totalFat" => 14,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 40,
+  "sodium" => 830,
+  "totalCarbs" => 11,
+  "fiber" => 0,
+  "sugars" => 5,
+  "protein" => 10,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "kung-pao-chicken",
+  "name" => "Kung Pao Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 6.73,
+  "calories" => 320,
+  "caloriesFromFat" => 185,
+  "totalFat" => 21,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 60,
+  "sodium" => 1050,
+  "totalCarbs" => 15,
+  "fiber" => 2,
+  "sugars" => 7,
+  "protein" => 17,
+  "allergens" => ["wheat", "soy", "peanut"]
+],
+[
+  "id" => "kung-pao-chicken-cub-meal",
+  "name" => "Kung Pao Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 5.05,
+  "calories" => 220,
+  "caloriesFromFat" => 130,
+  "totalFat" => 15,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 43,
+  "sodium" => 750,
+  "totalCarbs" => 11,
+  "fiber" => 2,
+  "sugars" => 4,
+  "protein" => 12,
+  "allergens" => ["wheat", "soy", "peanut"]
+],
+[
+  "id" => "grilled-teriyaki-chicken",
+  "name" => "Grilled Teriyaki Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 6,
+  "calories" => 275,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 160,
+  "sodium" => 470,
+  "totalCarbs" => 14,
+  "fiber" => 0,
+  "sugars" => 9,
+  "protein" => 33,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "grilled-teriyaki-chicken-cub-meal",
+  "name" => "Grilled Teriyaki Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 4.5,
+  "calories" => 210,
+  "caloriesFromFat" => 70,
+  "totalFat" => 8,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 120,
+  "sodium" => 350,
+  "totalCarbs" => 10.5,
+  "fiber" => 0,
+  "sugars" => 6.75,
+  "protein" => 24.75,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "teriyaki-chicken",
+  "name" => "Teriyaki Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 6,
+  "calories" => 340,
+  "caloriesFromFat" => 110,
+  "totalFat" => 13,
+  "saturatedFat" => 3.5,
+  "transFat" => 0,
+  "cholesterol" => 195,
+  "sodium" => 630,
+  "totalCarbs" => 14,
+  "fiber" => 3,
+  "sugars" => 10,
+  "protein" => 41,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "teriyaki-chicken-cub-meal",
+  "name" => "Teriyaki Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 4.5,
+  "calories" => 250,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 145,
+  "sodium" => 470,
+  "totalCarbs" => 10,
+  "fiber" => 0,
+  "sugars" => 8,
+  "protein" => 31,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "mushroom-chicken",
+  "name" => "Mushroom Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 5.7,
+  "calories" => 220,
+  "caloriesFromFat" => 130,
+  "totalFat" => 14,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 50,
+  "sodium" => 840,
+  "totalCarbs" => 10,
+  "fiber" => 1,
+  "sugars" => 5,
+  "protein" => 13,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "mushroom-chicken-cub-meal",
+  "name" => "Mushroom Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 4.3,
+  "calories" => 170,
+  "caloriesFromFat" => 100,
+  "totalFat" => 11,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 40,
+  "sodium" => 650,
+  "totalCarbs" => 8,
+  "fiber" => 0,
+  "sugars" => 4,
+  "protein" => 10,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "orange-chicken",
+  "name" => "Orange Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 5.92,
+  "calories" => 510,
+  "caloriesFromFat" => 220,
+  "totalFat" => 24,
+  "saturatedFat" => 5,
+  "transFat" => 0,
+  "cholesterol" => 86,
+  "sodium" => 850,
+  "totalCarbs" => 53,
+  "fiber" => 2,
+  "sugars" => 20,
+  "protein" => 26,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "orange-chicken-cub-meal",
+  "name" => "Orange Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 4.44,
+  "calories" => 380,
+  "caloriesFromFat" => 160,
+  "totalFat" => 18,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 60,
+  "sodium" => 645,
+  "totalCarbs" => 39,
+  "fiber" => 1,
+  "sugars" => 15,
+  "protein" => 20,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "potato-chicken",
+  "name" => "Potato Chicken",
+  "category" => "Chicken",
+  "servingSizeOz" => 5.2,
+  "calories" => 190,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 30,
+  "sodium" => 510,
+  "totalCarbs" => 18,
+  "fiber" => 2,
+  "sugars" => 4,
+  "protein" => 8,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "potato-chicken-cub-meal",
+  "name" => "Potato Chicken - Cub Meal",
+  "category" => "Chicken",
+  "servingSizeOz" => 3.9,
+  "calories" => 140,
+  "caloriesFromFat" => 70,
+  "totalFat" => 8,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 20,
+  "sodium" => 510,
+  "totalCarbs" => 15,
+  "fiber" => 0,
+  "sugars" => 3,
+  "protein" => 6,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Chicken Breast
+[
+  "id" => "honey-sesame-chicken-breast",
+  "name" => "Honey Sesame Chicken Breast",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 5.3,
+  "calories" => 340,
+  "caloriesFromFat" => 135,
+  "totalFat" => 15,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 45,
+  "sodium" => 540,
+  "totalCarbs" => 35,
+  "fiber" => 1,
+  "sugars" => 16,
+  "protein" => 16,
+  "allergens" => ["wheat", "soy", "sesame"]
+],
+[
+  "id" => "honey-sesame-chicken-breast-cub-meal",
+  "name" => "Honey Sesame Chicken Breast - Cub Meal",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 4,
+  "calories" => 250,
+  "caloriesFromFat" => 100,
+  "totalFat" => 11,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 35,
+  "sodium" => 400,
+  "totalCarbs" => 26,
+  "fiber" => 1,
+  "sugars" => 12,
+  "protein" => 12,
+  "allergens" => ["wheat", "soy", "sesame"]
+],
+[
+  "id" => "string-bean-chicken-breast",
+  "name" => "String Bean Chicken Breast",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 5.6,
+  "calories" => 210,
+  "caloriesFromFat" => 110,
+  "totalFat" => 12,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 30,
+  "sodium" => 560,
+  "totalCarbs" => 13,
+  "fiber" => 5,
+  "sugars" => 5,
+  "protein" => 12,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "string-bean-chicken-breast-cub-meal",
+  "name" => "String Bean Chicken Breast - Cub Meal",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 4.2,
+  "calories" => 160,
+  "caloriesFromFat" => 80,
+  "totalFat" => 9,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 25,
+  "sodium" => 420,
+  "totalCarbs" => 10,
+  "fiber" => 4,
+  "sugars" => 4,
+  "protein" => 9,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "sweetfire-chicken-breast",
+  "name" => "Sweetfire Chicken Breast",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 5.8,
+  "calories" => 360,
+  "caloriesFromFat" => 135,
+  "totalFat" => 15,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 45,
+  "sodium" => 370,
+  "totalCarbs" => 40,
+  "fiber" => 2,
+  "sugars" => 19,
+  "protein" => 15,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "sweetfire-chicken-breast-cub-meal",
+  "name" => "Sweetfire Chicken Breast - Cub Meal",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 4.4,
+  "calories" => 270,
+  "caloriesFromFat" => 100,
+  "totalFat" => 11,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 35,
+  "sodium" => 280,
+  "totalCarbs" => 30,
+  "fiber" => 2,
+  "sugars" => 14,
+  "protein" => 11,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "sweet-sour-chicken-breast",
+  "name" => "Sweet & Sour Chicken Breast",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 5.5,
+  "calories" => 300,
+  "caloriesFromFat" => 110,
+  "totalFat" => 12,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 25,
+  "sodium" => 260,
+  "totalCarbs" => 40,
+  "fiber" => 1,
+  "sugars" => 24,
+  "protein" => 10,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "sweet-sour-chicken-breast-cub-meal",
+  "name" => "Sweet & Sour Chicken Breast - Cub Meal",
+  "category" => "Chicken Breast",
+  "servingSizeOz" => 4.1,
+  "calories" => 270,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 20,
+  "sodium" => 220,
+  "totalCarbs" => 35,
+  "fiber" => 1,
+  "sugars" => 21,
+  "protein" => 9,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Beef
+[
+  "id" => "beijing-beef",
+  "name" => "Beijing Beef",
+  "category" => "Beef",
+  "servingSizeOz" => 5.6,
+  "calories" => 480,
+  "caloriesFromFat" => 245,
+  "totalFat" => 27,
+  "saturatedFat" => 5,
+  "transFat" => 0,
+  "cholesterol" => 35,
+  "sodium" => 600,
+  "totalCarbs" => 46,
+  "fiber" => 2,
+  "sugars" => 21,
+  "protein" => 14,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "beijing-beef-cub-meal",
+  "name" => "Beijing Beef - Cub Meal",
+  "category" => "Beef",
+  "servingSizeOz" => 4.2,
+  "calories" => 360,
+  "caloriesFromFat" => 185,
+  "totalFat" => 20,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 25,
+  "sodium" => 450,
+  "totalCarbs" => 35,
+  "fiber" => 2,
+  "sugars" => 16,
+  "protein" => 11,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "black-pepper-sirloin-steak",
+  "name" => "Black Pepper Sirloin Steak",
+  "category" => "Beef",
+  "servingSizeOz" => 5.1,
+  "calories" => 210,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 45,
+  "sodium" => 560,
+  "totalCarbs" => 13,
+  "fiber" => 1,
+  "sugars" => 7,
+  "protein" => 19,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "black-pepper-sirloin-steak-cub-meal",
+  "name" => "Black Pepper Sirloin Steak - Cub Meal",
+  "category" => "Beef",
+  "servingSizeOz" => 3.85,
+  "calories" => 160,
+  "caloriesFromFat" => 70,
+  "totalFat" => 8,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 35,
+  "sodium" => 420,
+  "totalCarbs" => 10,
+  "fiber" => 1,
+  "sugars" => 5,
+  "protein" => 14,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "broccoli-beef",
+  "name" => "Broccoli Beef",
+  "category" => "Beef",
+  "servingSizeOz" => 5.44,
+  "calories" => 150,
+  "caloriesFromFat" => 70,
+  "totalFat" => 7,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 12,
+  "sodium" => 520,
+  "totalCarbs" => 13,
+  "fiber" => 2,
+  "sugars" => 7,
+  "protein" => 9,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "broccoli-beef-cub-meal",
+  "name" => "Broccoli Beef - Cub Meal",
+  "category" => "Beef",
+  "servingSizeOz" => 4.1,
+  "calories" => 110,
+  "caloriesFromFat" => 50,
+  "totalFat" => 6,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 10,
+  "sodium" => 400,
+  "totalCarbs" => 10,
+  "fiber" => 2,
+  "sugars" => 5,
+  "protein" => 7,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Seafood
+[
+  "id" => "chili-crisp-shrimp",
+  "name" => "Chili Crisp Shrimp",
+  "category" => "Seafood",
+  "servingSizeOz" => 4,
+  "calories" => 210,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 100,
+  "sodium" => 340,
+  "totalCarbs" => 19,
+  "fiber" => 2,
+  "sugars" => 1,
+  "protein" => 13,
+  "allergens" => ["shellfish", "wheat", "soy"]
+],
+[
+  "id" => "chili-crisp-shrimp-cub-meal",
+  "name" => "Chili Crisp Shrimp Cub Meal",
+  "category" => "Seafood",
+  "servingSizeOz" => 3,
+  "calories" => 160,
+  "caloriesFromFat" => 70,
+  "totalFat" => 7.5,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 75,
+  "sodium" => 255,
+  "totalCarbs" => 14,
+  "fiber" => 1.5,
+  "sugars" => 1,
+  "protein" => 10,
+  "allergens" => ["shellfish", "wheat", "soy"]
+],
+[
+  "id" => "honey-walnut-shrimp",
+  "name" => "Honey Walnut Shrimp",
+  "category" => "Seafood",
+  "servingSizeOz" => 4.39,
+  "calories" => 430,
+  "caloriesFromFat" => 255,
+  "totalFat" => 28,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 70,
+  "sodium" => 700,
+  "totalCarbs" => 32,
+  "fiber" => 1,
+  "sugars" => 9,
+  "protein" => 13,
+  "allergens" => ["shellfish", "tree nut", "wheat", "egg"]
+],
+[
+  "id" => "honey-walnut-shrimp-cub-meal",
+  "name" => "Honey Walnut Shrimp - Cub Meal",
+  "category" => "Seafood",
+  "servingSizeOz" => 3.3,
+  "calories" => 240,
+  "caloriesFromFat" => 140,
+  "totalFat" => 15,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 36,
+  "sodium" => 380,
+  "totalCarbs" => 17,
+  "fiber" => 1,
+  "sugars" => 5,
+  "protein" => 7,
+  "allergens" => ["shellfish", "tree nut", "wheat", "egg"]
+],
+[
+  "id" => "wok-fired-shrimp",
+  "name" => "Wok-Fired Shrimp",
+  "category" => "Seafood",
+  "servingSizeOz" => 6,
+  "calories" => 190,
+  "caloriesFromFat" => 45,
+  "totalFat" => 5,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 140,
+  "sodium" => 1140,
+  "totalCarbs" => 19,
+  "fiber" => 1,
+  "sugars" => 15,
+  "protein" => 17,
+  "allergens" => ["shellfish", "wheat", "soy"]
+],
+[
+  "id" => "wok-fired-shrimp-cub-meal",
+  "name" => "Wok-Fired Shrimp - Cub Meal",
+  "category" => "Seafood",
+  "servingSizeOz" => 4.5,
+  "calories" => 140,
+  "caloriesFromFat" => 36,
+  "totalFat" => 4,
+  "saturatedFat" => 0.5,
+  "transFat" => 0,
+  "cholesterol" => 105,
+  "sodium" => 860,
+  "totalCarbs" => 15,
+  "fiber" => 1,
+  "sugars" => 11,
+  "protein" => 13,
+  "allergens" => ["shellfish", "wheat", "soy"]
+],
+[
+  "id" => "golden-treasure-shrimp",
+  "name" => "Golden Treasure Shrimp",
+  "category" => "Seafood",
+  "servingSizeOz" => 5,
+  "calories" => 360,
+  "caloriesFromFat" => 160,
+  "totalFat" => 18,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 100,
+  "sodium" => 440,
+  "totalCarbs" => 35,
+  "fiber" => 2,
+  "sugars" => 14,
+  "protein" => 14,
+  "allergens" => ["shellfish", "wheat", "soy", "egg"]
+],
+[
+  "id" => "golden-treasure-shrimp-cub-meal",
+  "name" => "Golden Treasure Shrimp - Cub Meal",
+  "category" => "Seafood",
+  "servingSizeOz" => 2.75,
+  "calories" => 210,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 60,
+  "sodium" => 250,
+  "totalCarbs" => 20,
+  "fiber" => 1,
+  "sugars" => 8,
+  "protein" => 8,
+  "allergens" => ["shellfish", "wheat", "soy", "egg"]
+],
+[
+  "id" => "steamed-ginger-fish",
+  "name" => "Steamed Ginger Fish",
+  "category" => "Seafood",
+  "servingSizeOz" => 6,
+  "calories" => 200,
+  "caloriesFromFat" => 110,
+  "totalFat" => 12,
+  "saturatedFat" => 2.5,
+  "transFat" => 0,
+  "cholesterol" => 40,
+  "sodium" => 1990,
+  "totalCarbs" => 8,
+  "fiber" => 0,
+  "sugars" => 6,
+  "protein" => 15,
+  "allergens" => ["fish", "wheat", "soy"]
+],
+[
+  "id" => "steamed-ginger-fish-cub-meal",
+  "name" => "Steamed Ginger Fish - Cub Meal",
+  "category" => "Seafood",
+  "servingSizeOz" => 2,
+  "calories" => 70,
+  "caloriesFromFat" => 35,
+  "totalFat" => 4,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 15,
+  "sodium" => 660,
+  "totalCarbs" => 3,
+  "fiber" => 0,
+  "sugars" => 2,
+  "protein" => 5,
+  "allergens" => ["fish", "wheat", "soy"]
+],
+
+// Appetizers
+[
+  "id" => "chicken-egg-roll",
+  "name" => "Chicken Egg Roll (1 Roll)",
+  "category" => "Appetizers",
+  "servingSizeOz" => 2.75,
+  "calories" => 200,
+  "caloriesFromFat" => 90,
+  "totalFat" => 10,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 20,
+  "sodium" => 340,
+  "totalCarbs" => 20,
+  "fiber" => 2,
+  "sugars" => 2,
+  "protein" => 6,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "chicken-potsticker",
+  "name" => "Chicken Potsticker (3 PCS)",
+  "category" => "Appetizers",
+  "servingSizeOz" => 3.3,
+  "calories" => 160,
+  "caloriesFromFat" => 60,
+  "totalFat" => 6,
+  "saturatedFat" => 1.5,
+  "transFat" => 0,
+  "cholesterol" => 20,
+  "sodium" => 250,
+  "totalCarbs" => 20,
+  "fiber" => 1,
+  "sugars" => 2,
+  "protein" => 6,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "cream-cheese-rangoon",
+  "name" => "Cream Cheese Rangoon (3 PCS)",
+  "category" => "Appetizers",
+  "servingSizeOz" => 2.4,
+  "calories" => 190,
+  "caloriesFromFat" => 70,
+  "totalFat" => 8,
+  "saturatedFat" => 5,
+  "transFat" => 0,
+  "cholesterol" => 35,
+  "sodium" => 180,
+  "totalCarbs" => 24,
+  "fiber" => 2,
+  "sugars" => 1,
+  "protein" => 5,
+  "allergens" => ["wheat", "milk", "soy"]
+],
+[
+  "id" => "vegetable-spring-roll",
+  "name" => "Vegetable Spring Roll (2 Rolls)",
+  "category" => "Appetizers",
+  "servingSizeOz" => 3.5,
+  "calories" => 240,
+  "caloriesFromFat" => 130,
+  "totalFat" => 14,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 560,
+  "totalCarbs" => 24,
+  "fiber" => 2,
+  "sugars" => 0,
+  "protein" => 4,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Cub Meals
+[
+  "id" => "orange-chicken-cub-meal",
+  "name" => "Orange Chicken Cub Meal (White Rice, Super Greens, Orange Chicken, Apple Crisps, Bottled Water)",
+  "category" => "Cub Meals",
+  "servingSizeOz" => 9.5,
+  "calories" => 580,
+  "caloriesFromFat" => 160,
+  "totalFat" => 17,
+  "saturatedFat" => 4,
+  "transFat" => 0,
+  "cholesterol" => 60,
+  "sodium" => 705,
+  "totalCarbs" => 84,
+  "fiber" => 5,
+  "sugars" => 30,
+  "protein" => 22,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "grilled-teriyaki-chicken-cub-meal",
+  "name" => "Grilled Teriyaki Chicken Cub Meal (Chow Mein, Super Greens, Grilled Teriyaki Chicken, Apple Crisps, Bottled Water)",
+  "category" => "Cub Meals",
+  "servingSizeOz" => 9.3,
+  "calories" => 400,
+  "caloriesFromFat" => 140,
+  "totalFat" => 16,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 120,
+  "sodium" => 700,
+  "totalCarbs" => 36,
+  "fiber" => 5,
+  "sugars" => 16,
+  "protein" => 28,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "broccoli-beef-cub-meal",
+  "name" => "Broccoli Beef Cub Meal (White Rice, Super Greens, Broccoli Beef, Apple Crisps, Bottled Water)",
+  "category" => "Cub Meals",
+  "servingSizeOz" => 9.5,
+  "calories" => 300,
+  "caloriesFromFat" => 60,
+  "totalFat" => 7,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 10,
+  "sodium" => 500,
+  "totalCarbs" => 49,
+  "fiber" => 6,
+  "sugars" => 13,
+  "protein" => 11,
+  "allergens" => ["wheat", "soy"]
+],
+// Soup
+[
+  "id" => "hot-sour-soup-cup",
+  "name" => "Hot & Sour Soup - Cup",
+  "category" => "Soup",
+  "servingSizeOz" => 12.2,
+  "calories" => 120,
+  "caloriesFromFat" => 40,
+  "totalFat" => 5,
+  "saturatedFat" => 0.5,
+  "transFat" => 0,
+  "cholesterol" => 65,
+  "sodium" => 880,
+  "totalCarbs" => 14,
+  "fiber" => 1,
+  "sugars" => 4,
+  "protein" => 7,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "hot-sour-soup-bowl",
+  "name" => "Hot & Sour Soup - Bowl",
+  "category" => "Soup",
+  "servingSizeOz" => 17.4,
+  "calories" => 170,
+  "caloriesFromFat" => 60,
+  "totalFat" => 6,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 90,
+  "sodium" => 1260,
+  "totalCarbs" => 20,
+  "fiber" => 1,
+  "sugars" => 6,
+  "protein" => 10,
+  "allergens" => ["wheat", "soy"]
+],
+
+// Beverages
+[
+  "id" => "bottled-water",
+  "name" => "Bottled Water",
+  "category" => "Beverages",
+  "servingSizeOz" => 16.9,
+  "calories" => 0,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "diet-coke",
+  "name" => "Diet Coke",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 0,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 45,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "coke",
+  "name" => "Coca-Cola",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 200,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 45,
+  "totalCarbs" => 52,
+  "fiber" => 0,
+  "sugars" => 52,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "sprite",
+  "name" => "Sprite",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 200,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 45,
+  "totalCarbs" => 52,
+  "fiber" => 0,
+  "sugars" => 52,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "diet-sprite",
+  "name" => "Diet Sprite",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 0,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 45,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "lemonade",
+  "name" => "Lemonade",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 220,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 10,
+  "totalCarbs" => 58,
+  "fiber" => 0,
+  "sugars" => 58,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "unsweetened-iced-tea",
+  "name" => "Unsweetened Iced Tea",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 0,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 10,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "sweetened-iced-tea",
+  "name" => "Sweetened Iced Tea",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 130,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 10,
+  "totalCarbs" => 34,
+  "fiber" => 0,
+  "sugars" => 34,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "hot-tea",
+  "name" => "Hot Tea",
+  "category" => "Beverages",
+  "servingSizeOz" => 16,
+  "calories" => 0,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "low-fat-milk",
+  "name" => "Low Fat Milk",
+  "category" => "Beverages",
+  "servingSizeOz" => 8,
+  "calories" => 100,
+  "caloriesFromFat" => 25,
+  "totalFat" => 3,
+  "saturatedFat" => 2,
+  "transFat" => 0,
+  "cholesterol" => 10,
+  "sodium" => 130,
+  "totalCarbs" => 12,
+  "fiber" => 0,
+  "sugars" => 12,
+  "protein" => 8,
+  "allergens" => ["milk"]
+],
+[
+  "id" => "apple-juice",
+  "name" => "Apple Juice",
+  "category" => "Beverages",
+  "servingSizeOz" => 8,
+  "calories" => 120,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 5,
+  "totalCarbs" => 28,
+  "fiber" => 0,
+  "sugars" => 24,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "orange-juice",
+  "name" => "Orange Juice",
+  "category" => "Beverages",
+  "servingSizeOz" => 8,
+  "calories" => 110,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 26,
+  "fiber" => 0,
+  "sugars" => 22,
+  "protein" => 2,
+  "allergens" => []
+],
+
+// More Items
+[
+  "id" => "teriyaki-sauce",
+  "name" => "Teriyaki Sauce",
+  "category" => "More",
+  "servingSizeOz" => 1.8,
+  "calories" => 70,
+  "caloriesFromFat" => 5,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 380,
+  "totalCarbs" => 16,
+  "fiber" => 0,
+  "sugars" => 14,
+  "protein" => 0,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "apple-pie-roll",
+  "name" => "Apple Pie Roll",
+  "category" => "More",
+  "servingSizeOz" => 1.94,
+  "calories" => 150,
+  "caloriesFromFat" => 30,
+  "totalFat" => 3,
+  "saturatedFat" => 1,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 90,
+  "totalCarbs" => 30,
+  "fiber" => 1,
+  "sugars" => 13,
+  "protein" => 2,
+  "allergens" => ["wheat", "soy", "egg"]
+],
+[
+  "id" => "sweet-sour-sauce",
+  "name" => "Sweet & Sour Sauce",
+  "category" => "More",
+  "servingSizeOz" => 1.8,
+  "calories" => 70,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 115,
+  "totalCarbs" => 21,
+  "fiber" => 0,
+  "sugars" => 20,
+  "protein" => 0,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "chili-sauce",
+  "name" => "Chili Sauce",
+  "category" => "More",
+  "servingSizeOz" => 0.25,
+  "calories" => 10,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 125,
+  "totalCarbs" => 2,
+  "fiber" => 0,
+  "sugars" => 2,
+  "protein" => 0,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "soy-sauce",
+  "name" => "Soy Sauce",
+  "category" => "More",
+  "servingSizeOz" => 0.21,
+  "calories" => 5,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 375,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => ["soy"]
+],
+[
+  "id" => "potsticker-sauce",
+  "name" => "Potsticker Sauce",
+  "category" => "More",
+  "servingSizeOz" => 0.4,
+  "calories" => 10,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 290,
+  "totalCarbs" => 3,
+  "fiber" => 0,
+  "sugars" => 2,
+  "protein" => 0,
+  "allergens" => ["wheat", "soy"]
+],
+[
+  "id" => "hot-mustard",
+  "name" => "Hot Mustard",
+  "category" => "More",
+  "servingSizeOz" => 0.25,
+  "calories" => 10,
+  "caloriesFromFat" => 10,
+  "totalFat" => 1,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 115,
+  "totalCarbs" => 0,
+  "fiber" => 0,
+  "sugars" => 0,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "plum-sauce",
+  "name" => "Plum Sauce",
+  "category" => "More",
+  "servingSizeOz" => 0.25,
+  "calories" => 15,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 55,
+  "totalCarbs" => 3,
+  "fiber" => 0,
+  "sugars" => 3,
+  "protein" => 0,
+  "allergens" => []
+],
+[
+  "id" => "fortune-cookie",
+  "name" => "Fortune Cookie",
+  "category" => "More",
+  "servingSizeOz" => 0.18,
+  "calories" => 20,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 5,
+  "fiber" => 0,
+  "sugars" => 2,
+  "protein" => 0,
+  "allergens" => ["wheat"]
+],
+[
+  "id" => "chocolate-chunk-cookie",
+  "name" => "Chocolate Chunk Cookie",
+  "category" => "More",
+  "servingSizeOz" => 1.13,
+  "calories" => 160,
+  "caloriesFromFat" => 60,
+  "totalFat" => 7,
+  "saturatedFat" => 3,
+  "transFat" => 0,
+  "cholesterol" => 5,
+  "sodium" => 125,
+  "totalCarbs" => 25,
+  "fiber" => 1,
+  "sugars" => 14,
+  "protein" => 2,
+  "allergens" => ["wheat", "soy", "milk", "egg"]
+],
+[
+  "id" => "tree-top-apple-crisps",
+  "name" => "Tree Top Apple Crisps",
+  "category" => "More",
+  "servingSizeOz" => 0.34,
+  "calories" => 40,
+  "caloriesFromFat" => 0,
+  "totalFat" => 0,
+  "saturatedFat" => 0,
+  "transFat" => 0,
+  "cholesterol" => 0,
+  "sodium" => 0,
+  "totalCarbs" => 10,
+  "fiber" => 2,
+  "sugars" => 7,
+  "protein" => 0,
+  "allergens" => []
+],
+];
+?>
+
+<?php
+// Extract unique categories from nutrition items
+$unique_categories = array_unique(array_column($nutrition_items, 'category'));
+sort($unique_categories);
 ?>
 
 <div id="nutrition-calculator-app">
@@ -22,11 +1596,9 @@ require_once 'nutrition-data.php';
       <h3 class="nc-category-title">Quick Jump to Categories</h3>
       <div class="nc-category-filters" role="group" aria-label="Category filters">
         <button class="nc-category-chip active" data-category="all">All Items</button>
-        <button class="nc-category-chip" data-category="chicken">Chicken</button>
-        <button class="nc-category-chip" data-category="beef">Beef</button>
-        <button class="nc-category-chip" data-category="seafood">Seafood</button>
-        <button class="nc-category-chip" data-category="sides">Sides</button>
-        <button class="nc-category-chip" data-category="appetizers">Appetizers</button>
+        <?php foreach ($unique_categories as $category): ?>
+        <button class="nc-category-chip" data-category="<?php echo strtolower(str_replace(' ', '-', $category)); ?>"><?php echo $category; ?></button>
+        <?php endforeach; ?>
       </div>
       <p class="nc-category-note">Click any category to Filter that Category Meals</p>
     </div>
@@ -49,7 +1621,9 @@ require_once 'nutrition-data.php';
         <!-- Summary will be rendered here -->
       </div>
       
-      <button id="nc-drawer-toggle" aria-label="Toggle meal details">▼</button>
+      <button id="nc-drawer-toggle" aria-label="Toggle meal details">
+        <img src="https://dev-my-semakan-str.pantheonsite.io/wp-content/uploads/2025/11/arrow.png" alt="" style="width: 20px; height: 20px; transition: transform 0.3s ease;">
+      </button>
     </div>
     
     <div class="nc-drawer-content">
@@ -70,7 +1644,7 @@ require_once 'nutrition-data.php';
 <style>
 /* ============================================
    Panda Express Nutrition Calculator – Updated Visuals
-   Brand: #E3242B (red), #FFFFFF (white), #000 (black)
+   Brand: #D1282E (red), #FFFFFF (white), #000 (black)
    ============================================ */
 
 #nutrition-calculator-app {
@@ -95,7 +1669,7 @@ require_once 'nutrition-data.php';
 
 .nc-category-card h3 {
   margin: 0 0 12px 0;
-  color: #E3242B;
+  color: #D1282E;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
@@ -115,7 +1689,7 @@ require_once 'nutrition-data.php';
   margin-bottom: 24px;
   background: #FFFFFF;
   padding: 16px 0;
-  border-bottom: 2px solid #E3242B;
+  border-bottom: 2px solid #D1282E;
 }
 
 .nc-search-wrapper {
@@ -128,7 +1702,7 @@ require_once 'nutrition-data.php';
   flex: 1;
   padding: 12px 16px;
   font-size: 16px;
-  border: 2px solid #E3242B;
+  border: 2px solid #D1282E;
   border-radius: 8px;
   color: #000;
   background: #FFFFFF;
@@ -154,7 +1728,7 @@ require_once 'nutrition-data.php';
   -webkit-overflow-scrolling: touch;
   padding: 6px 2px;
   scrollbar-width: thin;
-  scrollbar-color: #E3242B #f0f0f0;
+  scrollbar-color: #D1282E #f0f0f0;
 }
 
 .nc-category-filters::-webkit-scrollbar {
@@ -167,15 +1741,15 @@ require_once 'nutrition-data.php';
 }
 
 .nc-category-filters::-webkit-scrollbar-thumb {
-  background: #E3242B;
+  background: #D1282E;
   border-radius: 10px;
 }
 
 .nc-category-chip {
   padding: 8px 16px !important;
-  border: 2px solid #E3242B !important;
+  border: 2px solid #D1282E !important;
   background: #FFFFFF !important;
-  color: #E3242B !important;
+  color: #D1282E !important;
   border-radius: 10px !important;
   cursor: pointer;
   font-size: 14px !important;
@@ -198,7 +1772,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-category-chip.active {
-  background: #E3242B !important;
+  background: #D1282E !important;
   color: #FFFFFF !important;
   box-shadow: 0 4px 6px rgba(227, 36, 43, 0.4) !important;
 }
@@ -212,7 +1786,7 @@ require_once 'nutrition-data.php';
   font-size: 24px;
   font-weight: 700 !important;
   margin-bottom: 16px;
-  color: #E3242B;
+  color: #D1282E;
   padding-bottom: 8px;
 }
 
@@ -224,7 +1798,7 @@ require_once 'nutrition-data.php';
   border: 2px solid #ccc;
   border-radius: 12px;
   position: relative;
-  max-height: 600px;
+  max-height: none; /* Removed max-height to prevent vertical scroll */
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
@@ -239,7 +1813,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-table-container::-webkit-scrollbar-thumb {
-  background: #E3242B;
+  background: #D1282E;
   border-radius: 10px;
 }
 
@@ -277,7 +1851,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-nutrition-table th {
-  background: #E3242B;
+  background: #D1282E;
   color: #FFFFFF;
   padding: 10px 8px;
   text-align: center;
@@ -380,13 +1954,13 @@ require_once 'nutrition-data.php';
 .nc-nutrition-table th.nc-name-column {
   left: 0;
   z-index: 4;
-  background: #E3242B;
+  background: #D1282E;
 }
 
 .nc-nutrition-table th.nc-add-column {
   right: 0;
   z-index: 4;
-  background: #E3242B;
+  background: #D1282E;
   width: 60px;
 }
 
@@ -407,7 +1981,7 @@ require_once 'nutrition-data.php';
 
 /* Ensure header corners stay on top */
 .nc-nutrition-table thead th {
-  background: #E3242B;
+  background: #D1282E;
 }
 
 /* Hover effect for better readability */
@@ -427,15 +2001,17 @@ require_once 'nutrition-data.php';
   border-left: none;
 } */
 
-/* Item Name Cell */
+/* Item Name Cell - Updated to allow text wrapping */
 .nc-item-name {
   font-weight: 700;
-  color: #E3242B;
+  color: #D1282E;
   text-decoration: none;
   cursor: default;
   display: block;
   font-size: 14px;
-  white-space: nowrap;
+  white-space: normal; /* Changed from nowrap to normal to allow text wrapping */
+  word-wrap: break-word; /* Added to handle long text */
+  line-height: 1.4; /* Improved readability */
 }
 
 @media (max-width: 768px) {
@@ -479,9 +2055,9 @@ require_once 'nutrition-data.php';
 .nc-add-btn {
   width: 36px;
   height: 36px;
-  border: 2px solid #E3242B;
+  border: 2px solid #D1282E;
   background: #FFFFFF;
-  color: #E3242B;
+  color: #D1282E;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
@@ -495,14 +2071,14 @@ require_once 'nutrition-data.php';
 }
 
 .nc-add-btn:hover {
-  background: #E3242B;
+  background: #D1282E;
   color: white;
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(227, 36, 43, 0.4);
 }
 
 .nc-add-btn.added {
-  background: #E3242B;
+  background: #D1282E;
   color: white;
   border-color: #C11E24;
 }
@@ -518,7 +2094,7 @@ require_once 'nutrition-data.php';
   bottom: 0;
   left: 0;
   right: 0;
-  background: #E3242B;
+  background: #D1282E;
   color: #FFFFFF;
   box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -557,18 +2133,28 @@ require_once 'nutrition-data.php';
 }
 
 #nc-drawer-toggle {
-  background: none;
+  background: white;
   border: none;
-  color: white;
-  font-size: 20px;
   cursor: pointer;
-  padding: 6px;
+  padding: 8px;
   margin-left: 12px;
   flex-shrink: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+#nc-drawer-toggle img {
+  pointer-events: none;
   transition: transform 0.3s ease;
 }
 
-.nc-drawer.open #nc-drawer-toggle {
+.nc-drawer.open #nc-drawer-toggle img {
   transform: rotate(180deg);
 }
 
@@ -597,7 +2183,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-drawer-content::-webkit-scrollbar-thumb {
-  background: #E3242B;
+  background: #D1282E;
   border-radius: 10px;
 }
 
@@ -610,7 +2196,7 @@ require_once 'nutrition-data.php';
   -webkit-overflow-scrolling: touch;
   margin-bottom: 20px;
   scrollbar-width: thin;
-  scrollbar-color: #E3242B #f0f0f0;
+  scrollbar-color: #D1282E #f0f0f0;
 }
 
 #nc-meal-items-list::-webkit-scrollbar {
@@ -623,14 +2209,14 @@ require_once 'nutrition-data.php';
 }
 
 #nc-meal-items-list::-webkit-scrollbar-thumb {
-  background: #E3242B;
+  background: #D1282E;
   border-radius: 10px;
 }
 
 .nc-meal-item {
   min-width: 240px;
   background: #FFFFFF;
-  border: 2px solid #E3242B;
+  border: 2px solid #D1282E;
   border-radius: 12px;
   padding: 18px;
   display: flex;
@@ -638,7 +2224,7 @@ require_once 'nutrition-data.php';
   position: relative;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
-  border: 1px solid #E3242B;
+  border: 1px solid #D1282E;
 }
 
 .nc-meal-item:hover {
@@ -648,7 +2234,7 @@ require_once 'nutrition-data.php';
 
 .nc-meal-item-name {
   font-weight: 700;
-  color: #E3242B;
+  color: #D1282E;
   margin-bottom: 8px;
   word-break: break-word;
   font-size: 16px;
@@ -656,13 +2242,13 @@ require_once 'nutrition-data.php';
 
 /* Style for item count */
 .nc-meal-item-name count {
-  color: #E3242B;
+  color: #D1282E;
   font-weight: 700;
 }
 
 /* Style for highlighted item count */
 .nc-item-count-highlight {
-  color: #E3242B;
+  color: #D1282E;
   font-weight: 700;
 }
 
@@ -716,7 +2302,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-totals-table thead th {
-  background: #E3242B;
+  background: #D1282E;
   color: #FFFFFF;
   font-weight: 700;
   text-transform: uppercase;
@@ -751,7 +2337,7 @@ require_once 'nutrition-data.php';
 
 .nc-nutrient-value {
   font-weight: 700;
-  color: #E3242B;
+  color: #D1282E;
 }
 
 .nc-nutrient-unit {
@@ -784,7 +2370,7 @@ require_once 'nutrition-data.php';
 }
 
 .nc-btn-primary {
-  background: #E3242B;
+  background: #D1282E;
   color: white;
 }
 
@@ -796,8 +2382,8 @@ require_once 'nutrition-data.php';
 
 .nc-btn-secondary {
   background: #FFFFFF;
-  color: #E3242B;
-  border: 2px solid #E3242B;
+  color: #D1282E;
+  border: 2px solid #D1282E;
 }
 
 .nc-btn-secondary:hover {
@@ -1275,8 +2861,10 @@ require_once 'nutrition-data.php';
 
     // Filter by category
     if (currentCategory !== 'all') {
+      // Convert hyphens back to spaces for comparison
+      const categoryName = currentCategory.replace(/-/g, ' ');
       filtered = filtered.filter(item => 
-        item.category.toLowerCase() === currentCategory.toLowerCase()
+        item.category.toLowerCase() === categoryName.toLowerCase()
       );
     }
 
@@ -1580,7 +3168,9 @@ require_once 'nutrition-data.php';
   function updateCategoryChips() {
     document.querySelectorAll('.nc-category-chip').forEach(chip => {
       const chipCategory = chip.dataset.category;
-      if (chipCategory === currentCategory) {
+      // Convert currentCategory spaces to hyphens for comparison
+      const normalizedCurrentCategory = currentCategory.replace(/\s+/g, '-');
+      if (chipCategory === normalizedCurrentCategory) {
         chip.classList.add('active');
       } else {
         chip.classList.remove('active');
@@ -1630,10 +3220,24 @@ require_once 'nutrition-data.php';
     });
 
     // Drawer toggle
-    document.getElementById('nc-drawer-toggle').addEventListener('click', toggleDrawer);
+    const drawerToggleButton = document.getElementById('nc-drawer-toggle');
+    drawerToggleButton.addEventListener('click', function(e) {
+      // Stop propagation to prevent the header click handler from also triggering
+      e.stopPropagation();
+      toggleDrawer();
+    });
+    
+    // Handle image loading errors
+    const drawerToggleImg = drawerToggleButton.querySelector('img');
+    drawerToggleImg.addEventListener('error', function() {
+      // Replace with text arrow if image fails to load
+      this.style.display = 'none';
+      this.parentElement.innerHTML = '&#9660;';
+    });
+    
     document.querySelector('.nc-drawer-header').addEventListener('click', function(event) {
       // Prevent toggling when clicking on the toggle button itself
-      if (event.target.id !== 'nc-drawer-toggle') {
+      if (event.target.id !== 'nc-drawer-toggle' && !event.target.closest('#nc-drawer-toggle')) {
         toggleDrawer();
       }
     });
