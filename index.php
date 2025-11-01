@@ -316,13 +316,17 @@ $nutrition_items = [
       />
     </div>
     
-    <div class="nc-category-filters" role="group" aria-label="Category filters">
-      <button class="nc-category-chip active" data-category="all">All Items</button>
-      <button class="nc-category-chip" data-category="chicken">Chicken</button>
-      <button class="nc-category-chip" data-category="beef">Beef</button>
-      <button class="nc-category-chip" data-category="seafood">Seafood</button>
-      <button class="nc-category-chip" data-category="sides">Sides</button>
-      <button class="nc-category-chip" data-category="appetizers">Appetizers</button>
+    <div class="nc-category-card">
+      <h3 class="nc-category-title">Quick Jump to Categories</h3>
+      <div class="nc-category-filters" role="group" aria-label="Category filters">
+        <button class="nc-category-chip active" data-category="all">All Items</button>
+        <button class="nc-category-chip" data-category="chicken">Chicken</button>
+        <button class="nc-category-chip" data-category="beef">Beef</button>
+        <button class="nc-category-chip" data-category="seafood">Seafood</button>
+        <button class="nc-category-chip" data-category="sides">Sides</button>
+        <button class="nc-category-chip" data-category="appetizers">Appetizers</button>
+      </div>
+      <p class="nc-category-note">Click any category to Filter that Category Meals</p>
     </div>
   </div>
 
@@ -375,6 +379,33 @@ $nutrition_items = [
   padding: 20px;
   padding-bottom: 200px; /* Space for drawer */
   background: #FFFFFF;
+}
+
+/* Category Card */
+.nc-category-card {
+  background: linear-gradient(to bottom left, #f5f5f5, #ffffff);
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nc-category-card h3 {
+  margin: 0 0 12px 0;
+  color: #E3242B;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nc-category-note {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  margin: 12px 0 0 0;
+  font-style: italic;
+  padding-top: 5px;
 }
 
 /* Controls Section */
@@ -439,17 +470,17 @@ $nutrition_items = [
 }
 
 .nc-category-chip {
-  padding: 10px 20px !important;
+  padding: 8px 16px !important;
   border: 2px solid #E3242B !important;
   background: #FFFFFF !important;
   color: #E3242B !important;
-  border-radius: 24px !important;
+  border-radius: 10px !important;
   cursor: pointer;
   font-size: 14px !important;
   font-weight: 600 !important;
   white-space: nowrap;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1) !important;
   min-height: 40px;
   display: flex;
   align-items: center;
@@ -459,15 +490,15 @@ $nutrition_items = [
 }
 
 .nc-category-chip:hover {
-  background: #FFF2F2 !important;
+  background: #fffcfcff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(227, 36, 43, 0.25) !important;
+  box-shadow: 0 4px 4px rgba(227, 36, 43, 0.25) !important;
 }
 
 .nc-category-chip.active {
   background: #E3242B !important;
   color: #FFFFFF !important;
-  box-shadow: 0 4px 10px rgba(227, 36, 43, 0.4) !important;
+  box-shadow: 0 4px 6px rgba(227, 36, 43, 0.4) !important;
 }
 
 /* Category Sections */
@@ -477,7 +508,7 @@ $nutrition_items = [
 
 .nc-category-title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 700 !important;
   margin-bottom: 16px;
   color: #E3242B;
   padding-bottom: 8px;
@@ -552,7 +583,7 @@ $nutrition_items = [
   position: sticky;
   top: 0;
   z-index: 3;
-  width: 120px;
+  width: 140px;
   white-space: nowrap;
   font-size: 12px;
   text-transform: uppercase;
@@ -569,6 +600,28 @@ $nutrition_items = [
     width: 150px;
   }
   
+  .nc-nutrition-table th.nc-add-column {
+    width: 60px;
+  }
+  
+  .nc-nutrition-table th:not(.nc-name-column):not(.nc-add-column) {
+    width: auto; /* Allow columns to adjust to header text width */
+  }
+  
+  .nc-nutrition-table td:not(.nc-name-column):not(.nc-add-column) {
+    width: auto; /* Match the header width */
+  }
+  
+  .nc-nutrition-table th {
+    padding: 8px 4px; /* Reduced padding to save space */
+    font-size: 10px !important;
+  }
+
+  .nc-nutrition-table td {
+    padding: 8px 4px; /* Reduced padding to save space */
+    font-size: 14px !important;
+  }
+  
   .nc-item-name {
     white-space: normal;
     font-size: 12px !important;
@@ -576,18 +629,35 @@ $nutrition_items = [
 }
 
 @media (max-width: 480px) {
-  .nc-nutrition-table th {
-    width: 100px;
-    font-size: 10px !important;
-  }
-  
   .nc-nutrition-table th.nc-name-column {
     width: 130px;
   }
   
+  .nc-nutrition-table th.nc-add-column {
+    width: 60px;
+  }
+  
+  .nc-nutrition-table th:not(.nc-name-column):not(.nc-add-column) {
+    width: auto; /* Allow columns to adjust to header text width */
+  }
+  
+  .nc-nutrition-table td:not(.nc-name-column):not(.nc-add-column) {
+    width: auto; /* Match the header width */
+  }
+  
+  .nc-nutrition-table th {
+    padding: 6px 3px; /* Reduced padding to save space */
+    font-size: 10px !important;
+  }
+
+  .nc-nutrition-table td {
+    padding: 6px 3px; /* Reduced padding to save space */
+    font-size: 12px !important;
+  }
+  
   .nc-item-name {
     white-space: normal;
-    font-size: 12px !important;
+    font-size: 11px !important;
   }
 }
 
@@ -710,7 +780,7 @@ $nutrition_items = [
   border: 2px solid #E3242B;
   background: #FFFFFF;
   color: #E3242B;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
   font-size: 18px;
@@ -1107,14 +1177,19 @@ $nutrition_items = [
   }
   
   .nc-category-filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 8px 2px;
+    overflow-x: visible;
   }
   
   .nc-category-chip {
-    padding: 10px 24px;
+    padding: 10px 20px;
     font-size: 14px;
     min-height: 40px;
+    width: 100%;
+    margin: 0;
   }
   
   #nc-search-input {
@@ -1199,7 +1274,7 @@ $nutrition_items = [
   }
   
   .nc-category-chip {
-    padding: 10px 20px;
+    padding: 8px 18px;
     font-size: 13px;
     min-height: 38px;
   }
@@ -1258,7 +1333,10 @@ $nutrition_items = [
     overflow-x: auto;
     margin-bottom: 12px;
   }
-  
+  .nc-totals-table {
+    font-size: 11px;
+  }
+
   .nc-btn {
     padding: 16px;
     font-size: 14px;
@@ -1644,7 +1722,7 @@ $nutrition_items = [
           </thead>
           <tbody>
             <tr>
-              <td class="nc-nutrient-name">TOTAL (${mealList.length} ${mealList.length === 1 ? 'item' : 'items'})</td>
+              <td class="nc-nutrient-name">TOTAL (${mealList.length})</td>
               <td class="nc-nutrient-value">${totals.servingSizeOz.toFixed(2)}</td>
               <td class="nc-nutrient-value">${totals.calories}</td>
               <td class="nc-nutrient-value">${totals.caloriesFromFat}</td>
